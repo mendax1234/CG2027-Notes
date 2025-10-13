@@ -13,11 +13,15 @@ This is pretty straight-forward. Just two small tips
 
 ### 02. On Resistance
 
-When the MOSFET transistors is in **on**-state. We can think of it as a resistor (linear region). So, recall that resistance is measured using the following formula,
+When the MOSFET transistor operates in the linear region, it behaves like a **voltage-controlled resistor**, thus it can be modelled as having an **on resistnace**. And recall that in secondary school, we use the following formula to define the resistance,
 
 $$
 R=\rho\frac{L}{A}=\rho\cdot\frac{L}{H\times W}
 $$
+
+{% hint style="info" %}
+To refresh your secondary physics knowledge, the measurement formula for resistance is: $$R=\frac{V}{I}$$, where $$V$$ is the voltage across the resistor and $$I$$ is the current flowing through the resistor.
+{% endhint %}
 
 We need to know what the **H**eight, **L**ength and **W**idth is in our MOSFET.
 

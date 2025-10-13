@@ -37,21 +37,33 @@ In electronics, current is just the movement of charged particles (like tiny ele
 
 <figure><img src="../.gitbook/assets/drift-diffuse.png" alt="" width="563"><figcaption></figcaption></figure>
 
+{% stepper %}
+{% step %}
 #### Drift Current
 
-As explained clearly in the image.
+As explained clearly in the image. There is an external electric field to drive the movement of the electrons and holes to the final static state.
+{% endstep %}
 
+{% step %}
 #### Diffusion Current
-
-Diffusion happens whenever something spreads out from where it’s concentrated to where it’s not, e.g., from high concentration to low concentration. In other words, diffusion is driven by the **difference in concentrations**, or the **concentration gradient**.
 
 > TODO: Under deeper about the diffusion.
 
-{% hint style="info" %}
+Diffusion happens whenever something spreads out from where it’s concentrated to where it’s not, e.g., from high concentration to low concentration. In other words, diffusion is driven by the **difference in concentrations**, or the **concentration gradient**.
+
+**Analogy**: recall that when we drop an ink into the water, it will start diffusing until it reaches a static state. Similarly here, under the **diffusion**, there is no external force, the holes and electrons will spontaneously move to the correct region, to reach the final static state.
+{% endstep %}
+{% endstepper %}
+
+Under both modes, the electrons and holes will move to the final static region. And this movement will never stop?
+
+{% hint style="success" %}
 The current in all electronic devices originates from either of the two mechanisms.
 {% endhint %}
 
-Below is the carrier movement in devices
+#### Origin of Current in different devices
+
+Below is the table summarizing the carrier movement in different devices
 
 | Devices                     | Movement Mechanism in on-state | Type of Carriers                                          |
 | --------------------------- | ------------------------------ | --------------------------------------------------------- |
@@ -125,15 +137,16 @@ Before moving on, let's make some conventions
 
 ### Introduction
 
-There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs.
+There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put it simply, just NMOS and PMOS.
 
 <figure><img src="../.gitbook/assets/nmos-basic-structure.png" alt="" width="563"><figcaption></figcaption></figure>
 
-* An n-channel MOSFET is made using a $$p$$-type single-crystal silicon **substrate**.
-* Heavily doped n<sup>+</sup>-type regions, created in the substrate, form the **source** and **drain** regions.
+* An **n-channel** MOSFET or NMOS is made using a **p-type** single-crystal silicon **substrate**.
+* Heavily doped **n**<sup>**+**</sup>**-type** regions, created in the substrate, form the **source** and **drain** regions.
 * The metal or polysilicon electrode on top of the thin oxide (dielectric) layer, between the **source** and **drain** regions, is called the **gate**.
-* Note that MOSFET has a fourth terminal - the **substrate** or **body**.
-* Source terminal is the source of the carriers that will flow through the channel to the drain terminal.
+* Note that MOSFET has a fourth terminal, which is the **substrate** or **body**.
+* **Source terminal** is the **source of the carriers** that will flow through the channel to the **drain terminal**.
+  * **Analogy**: In NMOS, we can think the drain termianl as something that sucks the **electrons** from the source (ground) to the drain. We will use this analogy in the later parts also.
 
 ### Physical Structure
 
@@ -143,7 +156,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs.
 * Source, Drain : Heavily doped charge wells; symmetric
 * Gate oxide (dielectric) : Insulator between gate and channel
 * Gate : Controls the charge flow (creates the field effect)
-* Gate length: the distance between the source and drain regions under the gate
+* Gate length: the distance between the **source** and **drain** regions under the gate
 
 {% columns %}
 {% column width="50%" %}
@@ -183,12 +196,12 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs.
 {% endcolumns %}
 
 {% hint style="info" %}
-Threshold voltage, V<sub>T</sub> is the gate-source voltage at which channel is formed.
+The threshold voltage, V<sub>T</sub>, is the gate-source voltage at which channel is formed.
 
 * The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
 {% endhint %}
 
-For the sake of simplicity, in this course, we will use NMOS as an example. And thus the following sections will be based on NMOS.
+For the sake of simplicity, in this course, we will use NMOS as an example. And thus the following sections will be based on NMOS. The PMOS equivalent will be left as an exercise to the reader.
 
 ### Modes of Operations
 
@@ -204,42 +217,55 @@ We then increase V<sub>GS</sub> unilt V<sub>GS</sub> = V<sub>TH</sub>.
 
 <figure><img src="../.gitbook/assets/nmos-between-cut-off-and-linear.png" alt="" width="563"><figcaption></figcaption></figure>
 
-So what happens physically is that: At this point of time, **n-channel** is formed between source to drain. This is because as we increase V<sub>GS</sub>, it pushes away more holes and attracts more electrons to pile up near the surface of the subtrate under the gate. So the surface of p-subtrate effectively becomes **n-type** and is said to be **inverted** leading to formation of **n-channel**. The gate voltage at which this inversion happens is called **Threshold voltage, V**<sub>**TH**</sub>**.**
+So what happens physically is that: At this point of time, **n-channel** is formed between source to drain. This is because as we increase V<sub>GS</sub>, it pushes away more holes and **attracts more electrons** to pile up near the surface of the subtrate under the gate. So the surface of **p-subtrate** effectively becomes **n-type** and is said to be **inverted** leading to formation of **n-channel**. The gate voltage at which this inversion happens is called **Threshold voltage, V**<sub>**TH**</sub>**.**
 
 #### Linear
 
-After that, we continue increasing V<sub>GS</sub> when it is bigger than V<sub>TH</sub>. And then we fix V<sub>GS</sub>. Then slowly increase V<sub>DS</sub> but it shouldn't exceed V<sub>GS</sub>-V<sub>TH</sub>. So now, as V<sub>DS</sub> > 0, and there is a channel in between source and drain, as we have written above, the current will flow **from drain to source**.
+After that,
 
-So what happens physically is that:&#x20;
+1. we continue increasing V<sub>GS</sub> until it is bigger than V<sub>TH</sub>. And then we stop increasing V<sub>GS</sub> and fix it.
+2. Then we slowly increase V<sub>DS</sub> but it shouldn't exceed V<sub>GS</sub>-V<sub>TH</sub>.
 
-* With an n-channel MOSFET, a conductive **n-type channel** is formed between the **source** and **drain**.
+So now, as V<sub>DS</sub> > 0, and there is an **n-channel** in between source and drain, as we have written above, the current will flow **from drain to source**.
+
+And again, what happens physically is that:&#x20;
+
+* With an NMOS, a conductive **n-type channel** is formed between the **source** and **drain**.
 * When V<sub>DS</sub>​ (drain-to-source voltage) is small, the entire channel is uniformly formed — electrons can move easily.
-* As V<sub>DS</sub>​ increases slightly, the **electric field** pushes more electrons, and **current I**<sub>**D**</sub>**​** increases **proportionally**. (Ohm's law) This is valid for small values of V<sub>DS</sub>.
+* As V<sub>DS</sub>​ increases slightly, the **electric field** pushes more electrons, and **current I**<sub>**D**</sub>**​** increases **proportionally** (Ohm's law). This is valid only for **small values of V**<sub>**DS**</sub>.
 * This is called **linear region** or **ohmic region** of a MOSFET.
 
 {% hint style="info" %}
-"Region" means A range of V<sub>GS</sub> and V<sub>DS</sub> values where the MOSFET shows a specific physical behavior and current-voltage relationship.
+"Region" means a range of V<sub>GS</sub> and V<sub>DS</sub> values where the MOSFET shows a specific physical behavior and current-voltage or I-V relationship.
 {% endhint %}
 
 #### In between linear and saturation
 
-This time, as we have already fixed the V<sub>GS</sub> and start increasing the V<sub>DS</sub>. When V<sub>DS</sub> = V<sub>GS</sub>-V<sub>TH</sub>.
+Now, as we have already fixed the V<sub>GS</sub> and start increasing the V<sub>DS</sub>, we increase V<sub>DS</sub> until V<sub>DS</sub> = V<sub>GS</sub>-V<sub>TH</sub>.
 
 <figure><img src="../.gitbook/assets/nmos-in-between-linear-saturation.png" alt="" width="563"><figcaption></figcaption></figure>
 
-So, what happens physically? The effective voltage between gate and source V<sub>GD</sub> = V<sub>G</sub> - V<sub>D</sub> = V<sub>GS</sub> - V<sub>DS</sub> (As V<sub>S</sub> = 0) = V<sub>GS</sub> - (V<sub>GS</sub> - V<sub>TH</sub>) = V<sub>TH</sub>. Then the channel at drain end begins to **pinch off**.
+So, what happens physically now? The effective voltage between gate and source V<sub>GD</sub> = V<sub>G</sub> - V<sub>D</sub> = V<sub>GS</sub> - V<sub>DS</sub> (As V<sub>S</sub> = 0) = V<sub>GS</sub> - (V<sub>GS</sub> - V<sub>TH</sub>) = V<sub>TH</sub>. Then the channel at drain end begins to **pinch off**.
+
+{% hint style="success" %}
+Using the sucking analogy on the drain side, we can think of it as when we increase V<sub>DS</sub>, the drain will suck the electrons **more quickly**, thus the channel near to the drain will become **thinner**.
+{% endhint %}
 
 #### Saturation
 
-As we continue increasing V<sub>DS,</sub> now, V<sub>DS</sub> > V<sub>GS</sub>-V<sub>TH</sub>. Lets denote three variables here:
+As we continue increasing V<sub>DS</sub> until V<sub>DS</sub> > V<sub>GS</sub>-V<sub>TH</sub>. Let's denote three variables here:
 
 1. $$L$$ is the channel length
 2. $$\Delta L$$ is pinched-off channel length
-3. L<sub>eff</sub> is the effective channel length = L - $$\Delta L$$
+3. $$L_{\text{eff}}$$ is the effective channel length = $$L-\Delta L$$
 
 <figure><img src="../.gitbook/assets/nmos-saturation.png" alt="" width="563"><figcaption></figcaption></figure>
 
-So, what happends physically? Although the channel at the drain end pinches off, the electrons still flow to drain under the influence of **high electric field in the pinch-off region** from drain to source and hence the **current is constant**.
+So, what happens physically? Although the channel at the drain end pinches off, the electrons still flow to drain under the influence of **high electric field in the pinch-off region** from drain to source and hence the **current is constant**.
+
+{% hint style="warning" %}
+Here, in the **pinched-off** region near the drain, there is still **n-channel**, it's just that it is very **thin**, it doesn't mean that there is no **n-channel**.
+{% endhint %}
 
 <details>
 
@@ -263,6 +289,10 @@ In summary, we have the following table
 
 ### I-V characteristics
 
+#### Output characteristic
+
+{% stepper %}
+{% step %}
 #### Linear Region
 
 In the linear region, we have two situations
@@ -292,7 +322,9 @@ Based on this equation, we see that $$I_D$$ doesn't increase **perfectly** linea
 {% hint style="info" %}
 The linear region is where the digital integrated design comes in.
 {% endhint %}
+{% endstep %}
 
+{% step %}
 #### Saturation Region
 
 In the saturation region, only the increase in V<sub>GS</sub> will affect the current. We denote V<sub>Dsat</sub> = (V<sub>GS</sub> - V<sub>T</sub>).
@@ -319,12 +351,22 @@ $$
 {% hint style="info" %}
 The saturation region is where the analog integrated design comes in.
 {% endhint %}
+{% endstep %}
+{% endstepper %}
 
-***
-
-In summary, below is the NMOS and PMOS I-V characteristics, where the red cicrled part is the **linear region** and the green circled part is the **saturation region**.
+In summary, below is the NMOS and PMOS I-V characteristics (i<sub>D</sub> and V<sub>DS</sub>), where the red cicrled part is the **linear region** and the green circled part is the **saturation region**. This is called **output characteristics**, where I<sub>D</sub> versus V<sub>DS</sub> with V<sub>GS</sub> as a parameter.
 
 <figure><img src="../.gitbook/assets/nmos-pmos-iv-characteristics.png" alt=""><figcaption></figcaption></figure>
+
+#### Transfer characteristic
+
+If we draw the I-V characteristics between the V<sub>GS</sub> and i<sub>D</sub>, we will find that after V<sub>GS</sub> exceeds beyond V<sub>TH</sub>, i<sub>D</sub> will increase **quadratically** as V<sub>GS</sub> increases. This is called **transferred characteristics**, where i<sub>D</sub> versus V<sub>GS</sub> at a given fixed V<sub>DS</sub> value (V<sub>DS</sub> is chosen so that the MOSFET is in **saturation region**).
+
+<figure><img src="../.gitbook/assets/transfer-characteristics-of-mosfets.png" alt=""><figcaption></figcaption></figure>
+
+So, to understand its geometric meaning, we can see from the following graph,
+
+<figure><img src="../.gitbook/assets/meaning-transfer-characteristic.png" alt=""><figcaption></figcaption></figure>
 
 ### New Transistor Architecture
 
