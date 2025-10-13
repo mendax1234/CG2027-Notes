@@ -374,4 +374,8 @@ As for now, we only have one gate to control the channel. Nowadays, the new tran
 
 <figure><img src="../.gitbook/assets/3d-fet.png" alt=""><figcaption></figcaption></figure>
 
+For example, the following is the diagram showing the **height**, **width** and **length** of FinFET and Gate-All-Around.
+
+<figure><img src="../.gitbook/assets/finfet.png" alt="" width="420"><figcaption><p>FinFet length, width and height</p></figcaption></figure>
+
 [^1]: "holes" refers to electron holes, which are quasiparticles representing the absence of an electron in a material like a semiconductor. These holes act as **positive charge** carriers and are crucial for modern electronics, such as diodes and transistors.
