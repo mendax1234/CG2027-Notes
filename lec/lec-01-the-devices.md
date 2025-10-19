@@ -52,21 +52,17 @@ In electronics, current is just the movement of charged particles (electrons or 
 {% step %}
 #### Drift Current
 
-As explained clearly in the image. There is an external electric field to drive the movement of the electrons and holes to the final static state.
+As explained clearly in the image. There is an external electric field to drive the movement of the electrons and holes to the equilibrium.
 {% endstep %}
 
 {% step %}
 #### Diffusion Current
 
-> TODO: Understand deeper about the diffusion.
-
 Diffusion happens whenever something spreads out from where it’s concentrated to where it’s not, e.g., from high concentration to low concentration. In other words, diffusion is driven by the **difference in concentrations**, or the **concentration gradient**.
 
-**Analogy**: recall that when we drop an ink into the water, it will start diffusing until it reaches a static state. Similarly here, under the **diffusion**, there is no external force, the holes and electrons will spontaneously move to the correct region, to reach the final static state.
+**Analogy**: recall that when we drop an ink into the water, it will start diffusing until it reaches a static state. Similarly here, under the **diffusion**, there is no external force, the holes and electrons will spontaneously move to the correct region, to reach the equilibrium.
 {% endstep %}
 {% endstepper %}
-
-Under both modes, the electrons and holes will move to the final static region. And this movement will never stop?
 
 {% hint style="success" %}
 The current in all electronic devices originates from either of the two mechanisms.
@@ -114,6 +110,69 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 * Current, while operating in the breakdown region, can be limited by connecting a resistor, $$R$$, of suitable value in series with the $$pn$$ junction diode. ($$I=\frac{V_{DD}-V_Z}{R}$$)
 * Operation in the breakdown region does not destroy the diode, provided the current through it is kept below a certain level (because of the resistor in this circuit), such that the power dissipation ($$V×I$$) is below what the diode can handle.
 
+### More under the hood
+
+As we have mentioned above, the _pn-_&#x6A;unction or the diode is **most fundamental** circuit element. We can also find _pn-_&#x6A;unction in the MOSFET transistor. So, it will be good to know what's happening underneath the hood.
+
+### Holes and Electrons
+
+The main carrier in _n-_&#x74;ype material is **electron** while in _p-_&#x74;ype material is **hole**. But we should know that in whatever material, **only** the **electrons** can move freely, and the movement of electrons will cause the "effect" of **holes** are moving also, but actually the movement of holes is caused by the movement of **electrons**.
+
+Both _n_-type and _p-_&#x74;ype material are neutral, by which I mean inside each material, the number of electrons and the number of **protons** are the same. The underneath principle is that:
+
+{% columns %}
+{% column %}
+<figure><img src="../.gitbook/assets/p-type-holes.png" alt=""><figcaption></figcaption></figure>
+
+In _p-_&#x74;ype material, a new intermediate **energy-level** is created (<mark style="color:yellow;">yellow plate</mark> in the image above) so that the electrons (<mark style="color:blue;">blue spheres</mark> in the image above) will move up, leaving behind the [**holes**](#user-content-fn-2)[^2] in the lower energy level, making the electrons at the lower energy level free to move around. This can be seen as the **holes** moving around.
+{% endcolumn %}
+
+{% column %}
+<figure><img src="../.gitbook/assets/n-type-electrons.png" alt=""><figcaption></figcaption></figure>
+
+In _n-_&#x74;ype material, this new intermediate energy level (<mark style="color:yellow;">yellow plate</mark> in the image above) is created at the energy level above the gap. And at this level, the electrons (<mark style="color:blue;">blue spheres</mark> in the image above) can flow freely.
+{% endcolumn %}
+{% endcolumns %}
+
+The electrons moving at the **energy level** which is above the gap **will and only will** recombine with the holes at the **energy level** which is below the gap.
+
+{% hint style="warning" %}
+Here, the height only shows the **energy level** of the **electrons**, not protons. The higher the level is, the higher energy it has.
+{% endhint %}
+
+<details>
+
+<summary>What does the gap here mean?</summary>
+
+Just a quick recap about what the gap means. The gap is called the **band gap**. Basically, the bigger the gap is, the less conductive the material is. In the semiconductor material, the gap is relatively small. Even the gap is small, if we don't **dope** the semiconductor material, in other words, creating the above yellow plate, it's hard for the electrons to continuously moving freely in the semiconductor material.
+
+* For _n-_&#x74;ype material, the yellow plate is called **donor energy level**.
+* For _p-_&#x74;ype material, the yellow plate is called **acceptor energy level**.
+
+By themselves, a piece of N-type or P-type silicon is just a resistor (a material that conducts electricity). The magic that makes all modern electronics work happens when we join them together to form a _pn-_&#x6A;unction. This is what creates the special properties of a diode, a transistor, and every computer chip.
+
+</details>
+
+#### Depletion region
+
+In the connection between the _n-_&#x74;ype material and _p-_&#x74;ype material, the excessive and **diffused** electrons from the _n-_&#x74;ype flows to the _p-_&#x73;ide and recombine with the excessive **holes** in the _p-_&#x74;ype side. As a result, majority charge carriers (free electrons for the _n-_&#x74;ype material and holes for the _p-_&#x74;ype material) are depleted in the region around the junction interface, so this region is called the **depletion region**.
+
+#### Diffusion in Diode
+
+The depletion region is **charged** because the **diffusion** described above will cause the _p-_&#x73;ide to have **more electrons** thus showing **negative charge** and the _n-_&#x74;ype side to have **less electrons** thus showing **positive charge**.  This creates an **electric field** that provides a force opposing the charge **diffusion**. When the electric field is sufficiently strong to cease further diffusion of holes and electrons, the depletion region reaches the equilibrium.
+
+<figure><img src="../.gitbook/assets/diode-workinig-principle.png" alt="" width="563"><figcaption></figcaption></figure>
+
+#### Forward and Reverse Bias combined with Diffusion
+
+If we apply higher voltage at _n-_&#x73;ide, this will **increase** the depletion region, making it harder for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **reverse bias**.
+
+<figure><img src="../.gitbook/assets/reverse-bias-under-hood.png" alt=""><figcaption></figcaption></figure>
+
+Similarly, if we apply **lower voltage** at the _n-_&#x73;ide, the depletion region will be **decreased,** making it easier for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **forward bias**,
+
+<figure><img src="../.gitbook/assets/forward-bias-under-hood.png" alt=""><figcaption></figcaption></figure>
+
 ## BJT
 
 ### Introduction
@@ -149,6 +208,13 @@ Before moving on, let's make some conventions
 ### Introduction
 
 There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put it simply, just NMOS and PMOS.
+
+* An **n-channel** MOSFET or NMOS is made using a _**p-**_**type** single-crystal silicon **substrate**.
+* Heavily doped _**n**_<sup>_**+**_</sup>_**-**_**type** regions, created in the substrate, form the **source** and **drain** regions.
+* The metal or polysilicon electrode on top of the thin oxide (dielectric) layer, between the **source** and **drain** regions, is called the **gate**.
+* Note that MOSFET has a fourth terminal, which is the **substrate** or **body**.
+* **Source terminal** is the **source of the carriers** that will flow through the channel to the **drain terminal**.
+  * **Analogy**: In NMOS, we can think the **drain terminal** as something that sucks the **electrons** from the source (ground) to the drain. We will use this analogy in the later parts also.
 
 <figure><img src="../.gitbook/assets/nmos-basic-structure.png" alt="" width="563"><figcaption></figcaption></figure>
 
@@ -218,6 +284,8 @@ For the sake of simplicity, in this course, we will use NMOS as an example. And 
 
 ### Modes of Operations
 
+We may notice that between the **source**, **drain** and the **subtrate**, there are always _**pn**_**-junctions** (<mark style="color:purple;">purple area</mark> in the image below in this section). This is very important affect how our electrons can move.
+
 #### Cut-off
 
 We start when V<sub>GS</sub> = 0 -> no **channel** is formed for V<sub>DS</sub> $$\geq$$ 0 -> No current flow.
@@ -230,7 +298,7 @@ We then increase V<sub>GS</sub> unilt V<sub>GS</sub> = V<sub>TH</sub>.
 
 <figure><img src="../.gitbook/assets/nmos-between-cut-off-and-linear.png" alt="" width="563"><figcaption></figcaption></figure>
 
-So what happens physically is that: At this point of time, **n-channel** is formed between source to drain. This is because as we increase V<sub>GS</sub>, it pushes away more holes and **attracts more electrons** to pile up near the surface of the subtrate under the gate. So the surface of **p-subtrate** effectively becomes **n-type** and is said to be **inverted** leading to formation of **n-channel**. The gate voltage at which this inversion happens is called **Threshold voltage, V**<sub>**TH**</sub>**.**
+So what happens physically is that: At this point of time, **n-channel** is formed between source to drain. This is because as we increase V<sub>GS</sub>, and with the **existence of the insulator (oxide),** the high voltage applied at V<sub>GS</sub> pushes away more holes and **attracts more electrons** to pile up near the surface of the subtrate under the gate. So the surface of **p-subtrate** effectively becomes **n-type** and is said to be **inverted** leading to formation of **n-channel**. The gate voltage at which this inversion happens is called **Threshold voltage, V**<sub>**TH**</sub>**.** As you may notice, below the newly formed **n-channel**, the new _pn-_&#x6A;unction is formed.
 
 #### Linear
 
@@ -290,7 +358,7 @@ Basically, when transistors get **very tiny**, the gate **loses some control** o
 
 ***
 
-In summary, we have the following table
+In summary, we have the following table summarizing the above 5 stages of NMOS.
 
 | Condition / VDS Range                                    | Region                                     | Channel Description                                                                 | Current Behavior / Equation                                           |
 | -------------------------------------------------------- | ------------------------------------------ | ----------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
@@ -299,6 +367,18 @@ In summary, we have the following table
 | $$V_{GS} > V_{TH}$$ and $$0 < V_{DS} < V_{GS} - V_{TH}$$ | **Linear (Ohmic)**                         | Channel fully formed and uniform; acts like voltage-controlled resistor             | $$I_D =f(V_{DS}, V_{GS})$$                                            |
 | $$V_{DS} = V_{GS} - V_{TH}$$                             | **Boundary between Linear and Saturation** | Channel begins to pinch off at the drain end                                        | Marks start of current saturation                                     |
 | $$V_{DS} > V_{GS} - V_{TH}$$                             | **Saturation (Active)**                    | Channel pinched off near drain; current nearly constant (independent of $$V_{DS}$$) | $$I_D =f(V_{GS})$$                                                    |
+
+<details>
+
+<summary>In NMOS, why the current only flows from drain to source?</summary>
+
+We can think of the three possible routes that the current might flow:
+
+1. **Gate to other places**: This is **not possible** as there is an insulator material (oxide) between gate and source, drain and subtrate)
+2. **Source to body**: This is **not possible** as the source and body are both connected to ground (0V). And because of the existence of the **depletion region**. No voltage difference plus the depeltion region, the current cannot flow from source to body.
+3. **Drain to body**: As body is 0V and drain is connected to **positive voltage**, because of the **reverse-bias** property of the _pn-_&#x6A;unction, the current cannot flow from drain to body. And as you increase V<sub>DS</sub>, the depletion region can only become bigger and bigger, making it even more impossible for the current to flow from the drain to the body.
+
+</details>
 
 ### I-V characteristics
 
@@ -391,4 +471,18 @@ For example, the following is the diagram showing the **height**, **width** and 
 
 <figure><img src="../.gitbook/assets/finfet.png" alt="" width="420"><figcaption><p>FinFet length, width and height</p></figcaption></figure>
 
+## Homework
+
+### Two awesome videos
+
+Great thanks to my tutor **juezhao**, the following two videos from YouTube explains perfectly on everything under the hood, from the movement of electrons to the _pn-_&#x6A;unction and then to the MOSFETS.
+
+{% embed url="https://www.youtube.com/watch?v=hrpPKCDLRN0" %}
+
+{% embed url="https://www.youtube.com/watch?v=rkbjHNEKcRw" %}
+
+
+
 [^1]: "holes" refers to electron holes, which are quasiparticles representing the absence of an electron in a material like a semiconductor. These holes act as **positive charge** carriers and are crucial for modern electronics, such as diodes and transistors.
+
+[^2]: the element where there is a **proton** (<mark style="color:red;">red spheres</mark> shown in the image below) but without an electron. Thus, a hole carries **positive** charge.
