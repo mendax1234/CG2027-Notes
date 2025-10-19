@@ -31,12 +31,12 @@ In a semiconductor, there are two types of charge carriers: **electrons** (with
 
 ### Semiconductors
 
-Unlike metal and insulator, a unique property of semiconductor is that&#x20;impurities can be added (in a controlled manner) into it. This is called _Doping_ and its purpose is:
+Unlike metal and insulator, a unique property of semiconductor is that&#x20;impurities can be added (in a controlled manner) into it. This is called _doping_ and its purpose is:
 
-* to make the material n-type or p-type, and
+* to make the material _n-_&#x74;ype or _p-_&#x74;ype, and
 * to change the material's conductivity (or resistivity), usually is to **increase** the conductivity.
 
-In other words, we are changing the conductivity by specifically making the material _n-type_ or _p-type_.
+In other words, we are changing the conductivity by specifically making the material _n-type_ or _p-type_. For more about the chemistry side of doping, please go [here](lec-01-the-devices.md#holes-and-electrons).
 
 {% hint style="success" %}
 **Increasing** a material's **conductivity** is equivalent to **decreasing** its **resistivity**.
@@ -120,7 +120,7 @@ The main carrier in _n-_&#x74;ype material is **electron** while in _p-_&#x74;yp
 
 Both _n_-type and _p-_&#x74;ype material are neutral, by which I mean inside each material, the number of electrons and the number of **protons** are the same. The underneath principle is that:
 
-{% columns %}
+{% columns fullWidth="false" %}
 {% column %}
 <figure><img src="../.gitbook/assets/p-type-holes.png" alt=""><figcaption></figcaption></figure>
 
@@ -134,11 +134,11 @@ In _n-_&#x74;ype material, this new intermediate energy level (<mark style="colo
 {% endcolumn %}
 {% endcolumns %}
 
-The electrons moving at the **energy level** which is above the gap **will and only will** recombine with the holes at the **energy level** which is below the gap.
-
 {% hint style="warning" %}
 Here, the height only shows the **energy level** of the **electrons**, not protons. The higher the level is, the higher energy it has.
 {% endhint %}
+
+The electrons moving at the **energy level** which is above the gap **will and only will** recombine with the holes at the **energy level** which is below the gap.
 
 <details>
 
@@ -153,25 +153,71 @@ By themselves, a piece of N-type or P-type silicon is just a resistor (a materia
 
 </details>
 
+The process to create this kind of <mark style="color:yellow;">yellow plate</mark> is called **doping**. But given that, it is still a bit blur to some of you maybe. So, let's use the high school knowledge to further explain what is doping.
+
+{% stepper %}
+{% step %}
+#### Conductor
+
+We know that some materials are good conductors, for example, **copper**. But why are they good conductors? It is because by looking at copper's atomic structure, we see that it has a **single electron** in its **outermost shell**.
+
+<figure><img src="../.gitbook/assets/cupper-atom-level.png" alt="" width="563"><figcaption></figcaption></figure>
+
+Suppose our wire is made up of copper. When a power source is applied, this free electron in the copper, under the influence of the **external electric field**, will move in a specific direction, thus producing an electric current.
+
+<figure><img src="../.gitbook/assets/image.png" alt="" width="563"><figcaption></figcaption></figure>
+
+
+{% endstep %}
+
+{% step %}
+#### Semiconductor
+
+There is a type of material whose **conductivity** lies between the conductor and the insulator. One example is the **silicon** and its atomic structure is shown as follows,
+
+<figure><img src="../.gitbook/assets/silicon-atom-level.png" alt="" width="563"><figcaption></figcaption></figure>
+
+Silicon's outermost shell can actually hold 8 electrons, but one silicon atom only has 4 at its outermost shell. If we place multiple silicon atoms together, we will find that one silicon atom can share electron pairs with its four surrounding silicon atoms, forming **covalent bonds**. This is a very **stable** structure, which binds the electrons very strongly. Therefore, silicon's **conductivity** is very **weak** in this state.
+
+<figure><img src="../.gitbook/assets/many-silicon.png" alt="" width="563"><figcaption></figcaption></figure>
+{% endstep %}
+
+{% step %}
+#### N-type Doping
+
+But if we dope silicon with the element **phosphorus** (which is element #15), phosphorus has 5 electrons in its outermost shell, four of which can form **covalent bonds** with four silicon electrons. The remaining one acts as **a free electron**, which increases the conductivity of the new material. This type of doping is called _**n-**_**type doping**. Therefore, in _n-_&#x74;ype material, the charge carriers are **electrons**.
+
+<figure><img src="../.gitbook/assets/n-type-doping.png" alt="" width="563"><figcaption></figcaption></figure>
+{% endstep %}
+
+{% step %}
+#### P-type doping
+
+Similarly, if we dope silicon with the element **Boron** (which has 3 valence electrons), Boron's 3 outermost electrons can form **covalent bonds** with silicon, but this leaves an incomplete bond, which forms a **hole**. However, other electrons can move into this hole. Because another electron moved in, it is equivalent to the hole moving to a different location. At this point, the conductivity of this boron-doped silicon will also increase, and this type of doping is called _p-_&#x74;ype doping. Therefore, in _p-_&#x74;ype material, the charge carriers are **holes**.
+
+<figure><img src="../.gitbook/assets/p-type-doping.png" alt=""><figcaption></figcaption></figure>
+{% endstep %}
+{% endstepper %}
+
 #### Depletion region
 
-In the connection between the _n-_&#x74;ype material and _p-_&#x74;ype material, the excessive and **diffused** electrons from the _n-_&#x74;ype flows to the _p-_&#x73;ide and recombine with the excessive **holes** in the _p-_&#x74;ype side. As a result, majority charge carriers (free electrons for the _n-_&#x74;ype material and holes for the _p-_&#x74;ype material) are depleted in the region around the junction interface, so this region is called the **depletion region**.
+In the connection between the _n-_&#x74;ype material and _p-_&#x74;ype material, the excessive and **diffused** electrons from the _n-_&#x74;ype flows to the _p-_&#x73;ide and recombine with the excessive **holes** in the _p-_&#x74;ype side. As a result, some charge carriers (free electrons for the _n-_&#x74;ype material and holes for the _p-_&#x74;ype material) are depleted in the region around the junction interface, so this region is called the **depletion region**.
 
 #### Diffusion in Diode
 
-The depletion region is **charged** because the **diffusion** described above will cause the _p-_&#x73;ide to have **more electrons** thus showing **negative charge** and the _n-_&#x74;ype side to have **less electrons** thus showing **positive charge**.  This creates an **electric field** that provides a force opposing the charge **diffusion**. When the electric field is sufficiently strong to cease further diffusion of holes and electrons, the depletion region reaches the equilibrium.
+The depletion region is **charged** because the **diffusion** described above will cause the _p-_&#x73;ide to have **more electrons** thus showing **negative charge** and the _n-_&#x74;ype side to have **less electrons** thus showing **positive charge**. This creates an **electric field** pointing from the positive charge area to the negative charge area, thus providing a force **opposing** the charge **diffusion**. When the electric field is sufficiently strong to cease further diffusion of holes and electrons, the depletion region reaches the equilibrium.
 
 <figure><img src="../.gitbook/assets/diode-workinig-principle.png" alt="" width="563"><figcaption></figcaption></figure>
 
 #### Forward and Reverse Bias combined with Diffusion
 
-If we apply higher voltage at _n-_&#x73;ide, this will **increase** the depletion region, making it harder for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **reverse bias**.
-
-<figure><img src="../.gitbook/assets/reverse-bias-under-hood.png" alt=""><figcaption></figcaption></figure>
-
-Similarly, if we apply **lower voltage** at the _n-_&#x73;ide, the depletion region will be **decreased,** making it easier for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **forward bias**,
+Similarly, if we apply **lower voltage** at the _n-_&#x73;ide, the external electric field will cancel out the inner electric field, thus the depletion region will be **decreased** and the external field will help the movement of the electrons, making it easier for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **forward bias**,
 
 <figure><img src="../.gitbook/assets/forward-bias-under-hood.png" alt=""><figcaption></figcaption></figure>
+
+If we apply higher voltage at _n-_&#x73;ide, the external electric field will reinforce the inner electric field, thus **increasing** the depletion region, making it harder for the electrons to move from _n-_&#x73;ide to _p_-side. This is called **reverse bias**.
+
+<figure><img src="../.gitbook/assets/reverse-bias-under-hood.png" alt=""><figcaption></figcaption></figure>
 
 ## BJT
 
@@ -243,6 +289,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 * _p-_&#x74;ype body (substrate)
 * **Electrons** flow from source to drain
 * Current flows from **drain to source**
+* We can memorize it using "npn".
 
 <figure><img src="../.gitbook/assets/nmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
@@ -260,6 +307,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 * _n-_&#x74;ype body (substrate)
 * **Holes** flow from source to drain
 * Current flows from **source to drain**
+* Similarly, we can memorize it using "pnp"
 
 <figure><img src="../.gitbook/assets/pmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
@@ -473,7 +521,7 @@ For example, the following is the diagram showing the **height**, **width** and 
 
 ## Homework
 
-### Two awesome videos
+### Some awesome videos
 
 Great thanks to my tutor **juezhao**, the following two videos from YouTube explains perfectly on everything under the hood, from the movement of electrons to the _pn-_&#x6A;unction and then to the MOSFETS.
 
@@ -481,7 +529,30 @@ Great thanks to my tutor **juezhao**, the following two videos from YouTube expl
 
 {% embed url="https://www.youtube.com/watch?v=rkbjHNEKcRw" %}
 
+Besides the above, the following video from Bilibili is also awesome!
 
+{% embed url="https://www.bilibili.com/video/BV1nL411x7jH/?share_source=copy_web&vd_source=38953bcabbabbab600e123d8740d5a8a" %}
+
+### PMOS
+
+In NMOS, we have seen that the gate is connected to a **positive voltage** and the source and body are connected to ground, as shown as follows,
+
+<figure><img src="../.gitbook/assets/nmos-illustration.png" alt="" width="563"><figcaption></figcaption></figure>
+
+{% hint style="warning" %}
+Treat the `----` as ground in the image above. But by right, if you treat it as negative also can.
+{% endhint %}
+
+PMOS is just the opposite of NMOS, where the source-body-drain change to "pnp" and the gate is connected to ground while the body and source are connected to V<sub>DD</sub>, just as shown as follows,
+
+<figure><img src="../.gitbook/assets/pmos-illustration.png" alt="" width="563"><figcaption></figcaption></figure>
+
+Similarly, as our V<sub>G</sub> is 0 and V<sub>S</sub> is V<sub>DD</sub> now, for the sake of simplicity, we can check whether |V<sub>GS</sub>| > |V<sub>TH</sub>| to check if both **NMOS** and **PMOS** are in the ON state.
+
+When the _p-_&#x63;hannel is formed, since the electric field is from **source to drain**, the electrons will move from **drain to source**, causing the holes to move from **source to drain** through the _p-_&#x63;hannel. Thus the current flows from **source to drain**. So, we can again think of the source as providing **holes** and the drain is consuming **holes**. And eveything will work similarly,&#x20;
+
+* If you increase |V<sub>SG</sub>| (make V<sub>G</sub> closer to 0), the _p-_&#x63;hannel will become bigger and more current can flow.
+* If you decrease |V<sub>GD</sub>| (make V<sub>D</sub> close to 0), the pinch-off region near the drain will appear when |V<sub>GD</sub>| < |V<sub>TH</sub>|.
 
 [^1]: "holes" refers to electron holes, which are quasiparticles representing the absence of an electron in a material like a semiconductor. These holes act as **positive charge** carriers and are crucial for modern electronics, such as diodes and transistors.
 
