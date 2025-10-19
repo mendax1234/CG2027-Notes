@@ -114,7 +114,7 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 
 As we have mentioned above, the _pn-_&#x6A;unction or the diode is **most fundamental** circuit element. We can also find _pn-_&#x6A;unction in the MOSFET transistor. So, it will be good to know what's happening underneath the hood.
 
-### Holes and Electrons
+#### Holes and Electrons
 
 The main carrier in _n-_&#x74;ype material is **electron** while in _p-_&#x74;ype material is **hole**. But we should know that in whatever material, **only** the **electrons** can move freely, and the movement of electrons will cause the "effect" of **holes** are moving also, but actually the movement of holes is caused by the movement of **electrons**.
 
@@ -329,7 +329,7 @@ Now, as we have already fixed the V<sub>GS</sub> and start increasing the V<sub>
 So, what happens physically now? The effective voltage between gate and source V<sub>GD</sub> = V<sub>G</sub> - V<sub>D</sub> = V<sub>GS</sub> - V<sub>DS</sub> (As V<sub>S</sub> = 0) = V<sub>GS</sub> - (V<sub>GS</sub> - V<sub>TH</sub>) = V<sub>TH</sub>. Then the channel at drain end begins to **pinch off**.
 
 {% hint style="success" %}
-Using the sucking analogy on the drain side, we can think of it as when we increase V<sub>DS</sub>, the drain will suck the electrons **more quickly**, thus the channel near to the drain will become **thinner**.
+Using the sucking analogy on the drain side, we can think of it as when we increase V<sub>DS</sub>, the drain will suck the electrons **more quickly**, thus the channel near to the drain will become **thinner**. As the drain cosumes the electrons that the source provided, this is also why the source pin is called source and the drain is called drain.
 {% endhint %}
 
 #### Saturation
