@@ -6,17 +6,22 @@ The building blocks in digital circuit design are the silicon semiconductor devi
 2. the MOS
 3. bipolar transistors
 
+In this lecture, or more specifically, in this course, we will focus more on the MOS, but will quickly cover the diodes and bipolar transistors.
+
 ## The Diode
 
 Although diodes rarely occur directly in the schematic diagrams of present-day digital gates, they are still omnipresent. For instance, each MOS transistor implicitly contains a number of reverse-biased diodes. Diodes are used to protect the input devices of an IC against static charges. Also, a number of bipolar gates use diodes as a means to adjust voltage levels.
 
 ### Introduction
 
-The diode to be discussed here is a **semiconductor&#x20;**_**pn**_**-junction**. The _pn_-junction diode is the simplest of the semiconductor devices. Figure 1.1a shows a cross-section of a typical _pn-_&#x6A;unction.
+The diode to be discussed here is a **semiconductor&#x20;**_**pn**_**-junction**. The _pn_-junction diode is the simplest circuit element of the semiconductor devices. Figure 1.1a shows a cross-section of a typical _pn-_&#x6A;unction.
 
 <figure><img src="../.gitbook/assets/pn-junction-diode.png" alt="" width="375"><figcaption><p>Figure 1.1 Abrupt pn-junction diode and its schematic symbol</p></figcaption></figure>
 
-The _p_-type material is doped with _acceptor_ impurities (such as boron), which results in the presence of [**holes**](#user-content-fn-1)[^1] as the dominant or majority carriers. Similarly, the doping of silicon with _donor_ impurities (such as phosphorus or arsenic) creates an _n_-type material, where **electrons** are the majority carriers. Aluminum contracts provide access to the _p-_ and _n-_&#x74;erminals of the device. The circuit symbol of the diode, as used in schematic diagrams, is introduced in Figure 1.1c.
+* The _p_-type material is created by doping the silicon with _acceptor_ impurities (such as boron), which results in the presence of [**holes**](#user-content-fn-1)[^1] as the dominant or majority carriers.
+* Similarly, the doping of silicon with _donor_ impurities (such as phosphorus or arsenic) creates an _n_-type material, where **electrons** are the majority carriers.
+
+Aluminum contracts provide access to the _p-_ and _n-_&#x74;erminals of the device. The circuit symbol of the diode, as used in schematic diagrams, is introduced in Figure 1.1c.
 
 <figure><img src="../.gitbook/assets/diode-doping.png" alt="" width="375"><figcaption></figcaption></figure>
 
@@ -26,14 +31,20 @@ In a semiconductor, there are two types of charge carriers: **electrons** (with
 
 ### Semiconductors
 
-Unlike metal and insulator, a unique property of semiconductor is that&#x20;impurities can be added (in a controlled manner) into it. This is called _Doping_.
+Unlike metal and insulator, a unique property of semiconductor is that&#x20;impurities can be added (in a controlled manner) into it. This is called _Doping_ and its purpose is:
 
-* to make it n-type or p-type, and
-* to change its conductivity (or resistivity).
+* to make the material n-type or p-type, and
+* to change the material's conductivity (or resistivity), usually is to **increase** the conductivity.
+
+In other words, we are changing the conductivity by specifically making the material _n-type_ or _p-type_.
+
+{% hint style="success" %}
+**Increasing** a material's **conductivity** is equivalent to **decreasing** its **resistivity**.
+{% endhint %}
 
 ### Origin of Current
 
-In electronics, current is just the movement of charged particles (like tiny electrons). This movement happens in two main ways: **Drift** and **Diffusion**.
+In electronics, current is just the movement of charged particles (electrons or holes). This movement happens in two main ways: **Drift** and **Diffusion**.
 
 <figure><img src="../.gitbook/assets/drift-diffuse.png" alt="" width="563"><figcaption></figcaption></figure>
 
@@ -47,7 +58,7 @@ As explained clearly in the image. There is an external electric field to drive 
 {% step %}
 #### Diffusion Current
 
-> TODO: Under deeper about the diffusion.
+> TODO: Understand deeper about the diffusion.
 
 Diffusion happens whenever something spreads out from where it’s concentrated to where it’s not, e.g., from high concentration to low concentration. In other words, diffusion is driven by the **difference in concentrations**, or the **concentration gradient**.
 
@@ -65,26 +76,26 @@ The current in all electronic devices originates from either of the two mechanis
 
 Below is the table summarizing the carrier movement in different devices
 
-| Devices                     | Movement Mechanism in on-state | Type of Carriers                                          |
-| --------------------------- | ------------------------------ | --------------------------------------------------------- |
-| Resistor                    | Drift                          | • Electrons (Metal) • Electrons and holes (Semiconductor) |
-| Diode                       | Diffusion                      | • Electrons and holes                                     |
-| Bipolar Junction Transistor | Diffusion                      | • Electrons and holes                                     |
-| MOSFET                      | Drift                          | • Electrons (NMOS) • Holes (PMOS)                         |
+| Devices                     | Movement Mechanism in on-state | Type of Carriers                                                                |
+| --------------------------- | ------------------------------ | ------------------------------------------------------------------------------- |
+| Resistor                    | Drift                          | <ul><li>Electrons (Metal)</li><li>Electrons and holes (Semiconductor)</li></ul> |
+| Diode                       | Diffusion                      | <ul><li>Electrons and holes</li></ul>                                           |
+| Bipolar Junction Transistor | Diffusion                      | <ul><li>Electrons and holes</li></ul>                                           |
+| MOSFET                      | Drift                          | <ul><li>Electrons (NMOS)</li><li>Holes (PMOS)</li></ul>                         |
 
 ### Operation
 
 Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fundamental **nonlinear** circuit element.
 
-* It allows a current flow through it easily in one direction (known as the forward  &#x20;direction, V > 0), but not in the opposite direction (known as the reverse direction, V < 0), except for the reverse breakdown egion. This is unlike a resistor, which is a linear element that has a linear current-voltage relation.
-* Diode can be used as a switch and in a rectifier circuit to convert ac into dc. (CG1111A!)
+* It allows a current flow through it easily **in one direction** (known as the [forward  &#x20;direction](lec-01-the-devices.md#forward-bias), V > 0), but **not in the opposite direction** (known as the [reverse direction](lec-01-the-devices.md#reverse-bias), V < 0), **except for the reverse** [**breakdown region**](lec-01-the-devices.md#breakdown-region)**.** This is unlike a resistor, which is a linear element that has a linear current-voltage relation.
+* Diode can be used as a **switch** and in a **rectifier** circuit to convert AC into DC. (CG1111A!)
 
 #### Forward Bias
 
 <figure><img src="../.gitbook/assets/diode-forward-bias.png" alt=""><figcaption></figcaption></figure>
 
-* Under **forward-bias** (V > 0), an external voltage is applied such that the p-type terminal is at a **higher** (positive) voltage with respect to the n-type terminal.
-* The forward current flows through the diode from the p-type side to the n-type side.
+* Under **forward-bias** (V > 0), an external voltage is applied such that the _p-_&#x74;ype terminal is at a **higher** (positive) voltage with respect to the _n-_&#x74;ype terminal.
+* The forward current flows through the diode from the _p-_&#x74;ype side to the _n-_&#x74;ype side.
 * The forward current remains small (around 0 practically) until the **cut-in voltage** is reached. It then increases quickly with a small increase in the voltage V thereafter.
 * With a substantial forward current, the **voltage drop** across the diode lies in a narrow range. In other words, the voltage drop almost remains constant.
 
@@ -92,9 +103,9 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 
 <figure><img src="../.gitbook/assets/diode-reverse-bias.png" alt=""><figcaption></figcaption></figure>
 
-* Under **reverse-bias**, the voltage at p-type is lower than the voltage at n-type.
-* The reverse current (around 0) flows through the diode from the n-type sied to the p-type side.
-* For reverse bias voltage magnitude, $$∣V∣=V_R​<V_Z​$$ (V<sub>Z</sub> is the **breakdown voltage**), the reverse current is very small and can be treated practically as **zero**, meaning the diode is equivalent to an **open circuit**.
+* Under **reverse-bias**, the voltage at _p-_&#x74;ype is lower than the voltage at _n-_&#x74;ype.
+* The reverse current (around 0) flows through the diode from the _n-_&#x74;ype sied to the _p-_&#x74;ype side.
+* For reverse bias voltage magnitude, |V| = V<sub>R</sub> < V<sub>Z</sub> (V<sub>Z</sub> is the **breakdown voltage**), the reverse current is very small and can be treated practically as **zero**, meaning the diode is equivalent to an **open circuit**.
 
 #### Breakdown Region
 
@@ -112,7 +123,7 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 * Bipolar junction transistor (BJT) is a **3-terminal** device made using a single crystal semiconductor (typically silicon), just like the pn-junction diode.
 * BJT is made with **3 doped semiconductor regions**, namely **emitter**, **base** and **collector**, corresponding to the 3 terminals.
 * The "active" region of the BJT is the region under (and including) the **emitter**.
-* BJT is not a symmetrical device, in particular, impurities added to the emitter is at a much higher concentration than that added to collector.
+* BJT is not a symmetrical device, in particular, impurities added to the **emitter** is at a much higher concentration than that added to **collector**.
 
 ### Modes of Operation
 
@@ -129,7 +140,7 @@ Before moving on, let's make some conventions
 1. For MOSFETs, S denotes **Source**, D denotes **drain**, G denotes **gate**, and B denotes the **body** or subtrate terminals.
 2. For simplicity, we assume body (substrate) is shorted to source terminal.
 3. **Source** and **drain** are physically **symmetrical**.
-4. Majority charge carriers move **from source to drain**.
+4. Majority charge **carriers** move **from source to drain**.
 5. V<sub>GS</sub>: **Gate to source** voltage. Or the difference between gate voltage and source voltage. (Treat it as a vector in math, so V<sub>GS</sub>=-V<sub>SG</sub>)
 6. V<sub>DS</sub>: **Drain to source** voltage.
 7. V<sub>DD</sub>: Supply voltage.
@@ -141,31 +152,31 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 
 <figure><img src="../.gitbook/assets/nmos-basic-structure.png" alt="" width="563"><figcaption></figcaption></figure>
 
-* An **n-channel** MOSFET or NMOS is made using a **p-type** single-crystal silicon **substrate**.
-* Heavily doped **n**<sup>**+**</sup>**-type** regions, created in the substrate, form the **source** and **drain** regions.
+* An **n-channel** MOSFET or NMOS is made using a _**p-**_**type** single-crystal silicon **substrate**.
+* Heavily doped _**n**_<sup>_**+**_</sup>_**-**_**type** regions, created in the substrate, form the **source** and **drain** regions.
 * The metal or polysilicon electrode on top of the thin oxide (dielectric) layer, between the **source** and **drain** regions, is called the **gate**.
 * Note that MOSFET has a fourth terminal, which is the **substrate** or **body**.
 * **Source terminal** is the **source of the carriers** that will flow through the channel to the **drain terminal**.
-  * **Analogy**: In NMOS, we can think the drain termianl as something that sucks the **electrons** from the source (ground) to the drain. We will use this analogy in the later parts also.
+  * **Analogy**: In NMOS, we can think the **drain terminal** as something that sucks the **electrons** from the source (ground) to the drain. We will use this analogy in the later parts also.
 
 ### Physical Structure
 
 <figure><img src="../.gitbook/assets/mosfet-physical-structure.png" alt=""><figcaption></figcaption></figure>
 
-* Substrate (body) : Lightly doped
-* Source, Drain : Heavily doped charge wells; symmetric
-* Gate oxide (dielectric) : Insulator between gate and channel
-* Gate : Controls the charge flow (creates the field effect)
-* Gate length: the distance between the **source** and **drain** regions under the gate
+* **Substrate (body)**: Lightly doped
+* **Source, Drain**: Heavily doped charge wells; symmetric
+* **Gate oxide (dielectric)**: Insulator between gate and channel
+* **Gate**: Controls the charge flow (creates the field effect)
+* **Gate length**: the distance between the **source** and **drain** regions under the gate
 
 {% columns %}
 {% column width="50%" %}
 <figure><img src="../.gitbook/assets/nmos-channel.png" alt=""><figcaption></figcaption></figure>
 
-* n-type source/drain
-* p-type body (substrate)
+* _n-_&#x74;ype source/drain
+* _p-_&#x74;ype body (substrate)
 * **Electrons** flow from source to drain
-* Current flows from drain to source
+* Current flows from **drain to source**
 
 <figure><img src="../.gitbook/assets/nmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
@@ -179,10 +190,10 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 {% column width="50%" %}
 <figure><img src="../.gitbook/assets/pmos-channel.png" alt=""><figcaption></figcaption></figure>
 
-* p-type source/drain
-* n-type body (substrate)
+* _p-_&#x74;ype source/drain
+* _n-_&#x74;ype body (substrate)
 * **Holes** flow from source to drain
-* Current flows from source to drain
+* Current flows from **source to drain**
 
 <figure><img src="../.gitbook/assets/pmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
@@ -196,9 +207,11 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 {% endcolumns %}
 
 {% hint style="info" %}
-The threshold voltage, V<sub>T</sub>, is the gate-source voltage at which channel is formed.
+#### Notes
 
-* The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
+1. The threshold voltage, V<sub>T</sub>, is the gate-source voltage at which channel is formed.
+   1. The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
+2. For the sake of simplicity, we say NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>|.
 {% endhint %}
 
 For the sake of simplicity, in this course, we will use NMOS as an example. And thus the following sections will be based on NMOS. The PMOS equivalent will be left as an exercise to the reader.
@@ -230,7 +243,7 @@ So now, as V<sub>DS</sub> > 0, and there is an **n-channel** in between source a
 
 And again, what happens physically is that:&#x20;
 
-* With an NMOS, a conductive **n-type channel** is formed between the **source** and **drain**.
+* Within the NMOS, a conductive **n-type channel** is formed between the **source** and **drain**.
 * When V<sub>DS</sub>​ (drain-to-source voltage) is small, the entire channel is uniformly formed — electrons can move easily.
 * As V<sub>DS</sub>​ increases slightly, the **electric field** pushes more electrons, and **current I**<sub>**D**</sub>**​** increases **proportionally** (Ohm's law). This is valid only for **small values of V**<sub>**DS**</sub>.
 * This is called **linear region** or **ohmic region** of a MOSFET.
@@ -253,7 +266,7 @@ Using the sucking analogy on the drain side, we can think of it as when we incre
 
 #### Saturation
 
-As we continue increasing V<sub>DS</sub> until V<sub>DS</sub> > V<sub>GS</sub>-V<sub>TH</sub>. Let's denote three variables here:
+As we continue increasing V<sub>DS</sub> until V<sub>DS</sub> > V<sub>GS</sub> - V<sub>TH</sub>. Let's denote three variables here:
 
 1. $$L$$ is the channel length
 2. $$\Delta L$$ is pinched-off channel length

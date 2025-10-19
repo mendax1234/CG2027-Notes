@@ -20,20 +20,23 @@ R=\rho\frac{L}{A}=\rho\cdot\frac{L}{H\times W}
 $$
 
 {% hint style="info" %}
-To refresh your secondary physics knowledge, the measurement formula for resistance is: $$R=\frac{V}{I}$$, where $$V$$ is the voltage across the resistor and $$I$$ is the current flowing through the resistor.
+To refresh your secondary school physics knowledge, the measurement formula for resistance is: $$R=\frac{V}{I}$$, where $$V$$ is the voltage across the resistor and $$I$$ is the current flowing through the resistor.
 {% endhint %}
 
-We need to know what the **H**eight, **L**ength and **W**idth is in our MOSFET.
+So, to know the on resistance of a MOSFET transistor, we need to know what the **H**eight, **L**ength and **W**idth is in our MOSFET.
 
 <figure><img src="../.gitbook/assets/mosfet-width-height-length.png" alt="" width="563"><figcaption></figcaption></figure>
 
-Unfortunately, in the above formula $$\rho, L$$ and $$H$$ are all **constant** after manufacturing. We can only change the width of the transistor to change its resistance, this is called the **sizing approach.** Knowing this, our problem becomes easier, we just need to 1) fix the NMOS width, and calculate the PMOS width, 2) or fix the PMOS width and calculate the NMOS width.
+Unfortunately, in the above formula $$\rho, L$$ and $$H$$ are all **constant** after manufacturing. We can only change the width of the transistor to change its resistance, this is called the **sizing approach.** Knowing this, our problem becomes easier, we just need to
+
+1. fix the NMOS width, and calculate the PMOS width, or
+2. fix the PMOS width and calculate the NMOS width.
 
 <details>
 
 <summary>Food for though about <span class="math">\rho_n</span> and <span class="math">\rho_p</span></summary>
 
-Using the information given in this problem, as well as the formula, we can find that $$\rho_n:\rho_p\approx2:1$$. This is not something coincidence.
+Using the information given in this problem, as well as the formula, we can find that $$\rho_n:\rho_p\approx2:1$$. This is not something coincidental.
 
 </details>
 
