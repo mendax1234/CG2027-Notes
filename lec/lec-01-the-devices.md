@@ -338,8 +338,9 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
    1. The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
    1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <= |V<sub>TH</sub>|
-   2. Pinch-off will happen if |V<sub>GD</sub>| < |V<sub>TH</sub>|.
-   3. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
+   2. Pinch-off or saturation happens if |V<sub>GD</sub>| < |V<sub>TH</sub>|.
+   3. Linear region appears when |V<sub>GS</sub>| > 0 and |V<sub>GD</sub>| > |V<sub>TH</sub>|.
+   4. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
 {% endhint %}
 
 For the sake of simplicity, in this course, we will use NMOS as an example. And thus the following sections will be based on NMOS. The PMOS equivalent will be left as an exercise to the reader.
