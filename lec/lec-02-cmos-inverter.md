@@ -46,12 +46,14 @@ From this graph, we add on to the important conventions that will be used in Ele
 2. V<sub>IH</sub>: The **lowest input voltage** that the gate will recognize as a logic HIGH.
    1. Thus, in this graph, the **input high** range is \[V<sub>IH</sub>, V<sub>OH</sub>]
 
+By definition, V<sub>IH</sub> and V<sub>IL</sub> are the operational points of the inverter where $$\frac{dV_{\text{out}}}{dV_{\text{in}}}=-1$$.
+
 #### Noise Margin
 
 **Noise margin** is how much noise a signal can tolerate and still be **read** correctly as 0 or 1. So, in our notation, we can easily treat NM<sub>H</sub> as the length of **input high** range and NM<sub>L</sub> as the length of the **input low** range.
 
-* NM<sub>H</sub> = V<sub>OH</sub> - V<sub>IH</sub>
-* NM<sub>L</sub> = V<sub>IL</sub> - V<sub>OL</sub>
+* NM<sub>H</sub> = V<sub>OH</sub> - V<sub>IH</sub>, or more precisely, V<sub>DD</sub> - V<sub>IH</sub>.
+* NM<sub>L</sub> = V<sub>IL</sub> - V<sub>OL</sub>, or more precisely, just V<sub>IL</sub>.
 
 <figure><img src="../.gitbook/assets/nmh-nml.png" alt="" width="375"><figcaption></figcaption></figure>
 
@@ -99,8 +101,8 @@ As V<sub>in</sub> changes, the CMOS inverter goes through **five** different com
 1. 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TN</sub>: NMOS off, PMOS on.
 2. V<sub>TN</sub> < V<sub>in</sub> < V<sub>inv</sub>: PMOS linear, NMOS saturation.
 3. V<sub>in</sub> = V<sub>inv</sub>: Both PMOS and NMOS saturation
-4. V<sub>inv</sub> < V<sub>in</sub> < V<sub>DD</sub> - V<sub>TH</sub>: NMOS linear, PMOS saturation
-5. V<sub>DD</sub> - V<sub>TP</sub> < V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>DD</sub>: PMOS OFF, NMOS ON
+4. V<sub>inv</sub> < V<sub>in</sub> < V<sub>DD</sub> - |V<sub>TP</sub>|: NMOS linear, PMOS saturation
+5. V<sub>DD</sub> - |V<sub>TP</sub>| < V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>DD</sub>: PMOS OFF, NMOS ON
 
 where,
 
@@ -112,18 +114,27 @@ To understand it more clearly, let's use the following example,
 
 <figure><img src="../.gitbook/assets/cmos-inverter-switching-characteristic.jpg" alt=""><figcaption></figcaption></figure>
 
-Suppose |V<sub>TN</sub>| = 0.3V, |V<sub>TP</sub>| = 0.4V, V<sub>DD</sub> = 1V and V<sub>inv</sub> = 0.5V
+Suppose V<sub>TN</sub> = 0.3V, V<sub>TP</sub> = -0.4V, V<sub>DD</sub> = 1V and V<sub>inv</sub> = 0.5V
 
-1. 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TN</sub> -> 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> 0.4: Let's take V<sub>in</sub> = 0.2V
+1. 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TN</sub> -> 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> 0.4: Let's take V<sub>in</sub> = 0.2V and assume Vout = 1V.
    1. NMOS: |V<sub>GS</sub>| < |V<sub>TN</sub>|, NMOS is OFF.
-   2. PMOS: |V<sub>GS</sub>| <i class="fa-greater-than-equal">:greater-than-equal:</i> 0.6V > |V<sub>TP</sub>|, PMOS is ON, thus V<sub>out</sub> = 1V. |V<sub>GD</sub>| = 0.8V > |V<sub>TN</sub>|, PMOS in **linear region**.
-2. V<sub>TN</sub> < V<sub>in</sub> < V<sub>inv</sub> -> 0.4 < V<sub>in</sub> < 0.5: Let's take V<sub>in</sub> = 0.45V, now both NMOS and PMOS are ON, let's assume V<sub>out</sub> drops a bit but is still high, is 0.8V.
-   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. |V<sub>GD</sub>| = 0.35V > |V<sub>TN</sub>|, NMOS operates in **saturation** region.
-   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. |V<sub>GD</sub>| = 0.35V < |V<sub>TP</sub>|, PMOS operates in **linear** region.
+   2. PMOS: |V<sub>GS</sub>| <i class="fa-greater-than-equal">:greater-than-equal:</i> 0.6V > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.8V < V<sub>TP</sub>, PMOS in **saturation region**.
+2. V<sub>TN</sub> < V<sub>in</sub> < V<sub>inv</sub> -> 0.4 < V<sub>in</sub> < 0.5: Let's take V<sub>in</sub> = 0.45V and assume V<sub>out</sub> drops a bit but is still high, is 0.8V.
+   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = -0.35V < V<sub>TN</sub>, NMOS operates in **saturation** **region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.35V > V<sub>TP</sub>, PMOS operates in **linear** **region.**
 3. V<sub>in</sub> = V<sub>inv</sub>: Let's say V<sub>in</sub> = 0.5V and V<sub>out</sub> = 0.5V
-   1. NMOS: still on, |V<sub>GD</sub>| = 0 < |VTN|, NMOS operates in&#x20;
+   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is still on. V<sub>GD</sub> = 0 < V<sub>TN</sub>, NMOS operates in **saturation region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is still on. V<sub>GD</sub> = 0 > V<sub>TP</sub>, PMOS operates in **linear region**.
+4. V<sub>inv</sub> < V<sub>in</sub> < V<sub>DD</sub> - |V<sub>TP</sub>| -> 0.5 < V<sub>in</sub> < 0.6V. Let's take V<sub>in</sub> = 0.55V and assume V<sub>out</sub> is 0.2V.
+   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = 0.35V > V<sub>TN</sub>, NMOS operates in **linear region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = 0.35V > V<sub>TP</sub>, PMOS operates in **linear region**.
+5. V<sub>DD</sub> - |V<sub>TP</sub>| < V<sub>in</sub> < V<sub>DD</sub> -> 0.6 < V<sub>in</sub> < 1. Let's take V<sub>in</sub> = 0.75V and assum V<sub>out</sub> is 0V.
+   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = 0.75V > V<sub>TN</sub>, NMOS operates in **linear region**.
+   2. PMOS: |V<sub>GS</sub>| < |V<sub>TP</sub>|, PMOS is OFF.
 
-> Seems that using |VGD| < |VTH| to indicate that&#x20;
+{% hint style="success" %}
+V<sub>in</sub> is the gate voltage V<sub>G</sub> here.
+{% endhint %}
 
 To summarize the five regions of operations together into one image, we have the following VTC of CMOS inverter
 
@@ -201,6 +212,12 @@ $$
 
 where $$R$$ is the **on resistance** of the PMOS/NMOS device, and $$C$$ is the capacitance of the capacitor.
 
+{% hint style="success" %}
+Hence, a **fast gate** is built either by keeping the output capacitance **small** or by decreasing the on-resistance of the transistor.
+{% endhint %}
+
+There is also a second approach to know the propagation delay if we don't know the **on-resistance**, it is introduced [later](lec-02-cmos-inverter.md#cmos-inverter-propagation-delay).
+
 ## Power Dissipation
 
 As we have seen above, when the CMOS is switching, the **short circuit current** will consume some power. Also, we have mentioned about the **leakage current**, which will also consume some power. Lastly, as we have introduced the capacitors above, charging and discharging the capacitors will also consume some power, this is called [**dynamic power consumption**](lec-02-cmos-inverter.md#dynamic-power-consumption).
@@ -217,13 +234,191 @@ $$
 E_{\text{VDD}}=\int_0^\infty i_{\text{VDD}}(t)\cdot V_{\text{DD}}~dt
 $$
 
-Its power is energy/transition times frequency f, which is $$C_L\cdot V_{\text{DD}}^2\cdot f$$. However, we can see the in this circuit, the capacitor will take some power consumption, and it can be calculated by integrating $$E_{C_L}=\int_0^\infty i_{\text{VDD}}(t)\cdot v_{\text{out}}~dt$$, which will give us $$\frac{1}{2}\cdot C_L\cdot V_{\text{DD}}^2$$. This is only half of the total energy consumption? Where does the rest half go?
+Since $$V_{\text{DD}}$$ is constant, move it outside the integral:
 
-If you think about it, it won't be hard to find out that the other half is dissipated as **heat** on the PMOS's resistor.
+$$
+\begin{align*}
+E_{\text{VDD}} &= V_{\text{DD}} \int_0^\infty i_{\text{VDD}}(t)~dt
+\end{align*}
+$$
+
+For a capacitive load $$C_L$$, use $$i_{\text{VDD}}(t) = C_L \frac{dv_{\text{out}}(t)}{dt}$$ (during charging, where $$v_{\text{out}}$$ is the output voltage):
+
+$$
+\begin{align*}
+E_{\text{VDD}} &= V_{\text{DD}} \int_0^\infty C_L \frac{dv_{\text{out}}(t)}{dt}~dt
+\end{align*}
+$$
+
+Move $$C_L$$ outside and change variable to $$v = v_{\text{out}}$$ (substitute $$dt = dv / (dv/dt)$$):
+
+$$
+\begin{align*}
+E_{\text{VDD}} &= V_{\text{DD}}\cdot C_L \int_0^{V_{\text{DD}}}1~dv
+\end{align*}
+$$
+
+Evaluate the integral (limits from 0 to $$V_{\text{DD}}$$ as $$v_{\text{out}}$$ charges fully):
+
+$$
+\begin{align*}
+E_{\text{VDD}} &= V_{\text{DD}} \cdot C_L \cdot V_{\text{DD}} = C_L V_{\text{DD}}^2
+\end{align*}
+$$
+
+Its power is energy/transition times frequency f, which is $$C_L\cdot V_{\text{DD}}^2\cdot f$$. However, we can see the in this circuit, the capacitor will also take some power consumption, and it can be calculated by integrating the follwoing, which will give us $$\frac{1}{2}\cdot C_L\cdot V_{\text{DD}}^2$$,
+
+$$
+E_{C_L}=\int_0^\infty i_{\text{VDD}}(t)\cdot v_{\text{out}}~dt
+$$
+
+Similarly as above, for a capacitive load $$C_L$$, use $$i_{\text{VDD}}(t) = C_L \frac{dv_{\text{out}}(t)}{dt}$$ (during charging, where $$v_{\text{out}}$$ is the output voltage):
+
+$$
+\begin{align*}
+E_{C_L} &= \int_0^\infty C_L \frac{dv_{\text{out}}(t)}{dt} \cdot v_{\text{out}}(t)~dt
+\end{align*}
+$$
+
+Move $$C_L$$ outside the integral:
+
+$$
+\begin{align*}
+E_{C_L} &= C_L \int_0^\infty v_{\text{out}}(t) \cdot \frac{dv_{\text{out}}(t)}{dt}~dt
+\end{align*}
+$$
+
+Substitute $$v = v_{\text{out}}$$, so $$dv = \frac{dv_{\text{out}}}{dt}dt$$, and change the limits of integration from $$t: 0 \to \infty$$ to $$v: 0 \to V_{\text{DD}}$$ (as $$v_{\text{out}}$$ charges from 0 to $$V_{\text{DD}}$$):
+
+$$
+\begin{align*}
+E_{C_L} &= C_L \int_0^{V_{\text{DD}}} v~dv
+\end{align*}
+$$
+
+Evaluate the integral:
+
+$$
+\begin{align*}
+\int_0^{V_{\text{DD}}} v~dv &= \left[ \frac{1}{2} v^2 \right]0^{V{\text{DD}}} = \frac{1}{2} V_{\text{DD}}^2 - 0 = \frac{1}{2} V_{\text{DD}}^2.
+\end{align*}
+$$
+
+Thus, the final result is:
+
+$$
+\begin{align*}
+E_{C_L} &= C_L \cdot \frac{1}{2} V_{\text{DD}}^2 = \frac{1}{2} C_L V_{\text{DD}}^2
+\end{align*}
+$$
+
+But this is only **half** of the total energy consumption. Where does the rest **half** go? If you think about it, it won't be hard to find out that the other half is dissipated as **heat** on the PMOS's resistor.
 
 {% hint style="warning" %}
 The above analysis is based on the PMOS! In other words, when we are **charging**! When we are **discharging**, the **energy consumption from the power supply** is **0J**! And all the energy stored in the capacitor ($$\frac{1}{2}\cdot C_L\cdot V_{\text{DD}}^2$$) will dissipate as heat on the NMOS's resistor.
 {% endhint %}
+
+#### Modification for Circuits with Reduced Swing
+
+As we have seen above, we can exploit **reduced swing** to lower the power. And the circuit after modification is shown below,
+
+<figure><img src="../.gitbook/assets/modification-for-circuits-using-reduced-swings.png" alt="" width="563"><figcaption></figcaption></figure>
+
+And now the energy per transition will be $$E_{0 \to 1} = C_L \cdot V_{\text{dd}} \cdot (V_{\text{dd}} - V_t)$$ and the energy for the capacitor will be $$\frac{1}{2}\cdot C_L\cdot (V_{\text{DD}}-V_t)^2$$.
+
+{% hint style="success" %}
+We can just change the upper limit from $$V_{\text{DD}}$$ to $$V_{\text{DD}}-V_t$$ to get the above result. The integration processes are exactly the same.
+{% endhint %}
+
+#### Node Transition Activity and Power
+
+Now, let's consider switching a CMOS gate for $$N$$ clock cycles
+
+$$
+E_N = C_L \cdot V_{\text{dd}}^2 \cdot n(N)
+$$
+
+where $$E_N$$ is the energy consumed for $$N$$ clock cycles and $$n(N)$$ is the number of $$0\to1$$ transitions in $$N$$ clock cycles. Thus, we can have the average power $$P_{\text{avg}}$$ as follows,
+
+$$
+\begin{align*}
+P_{\text{avg}} &= \lim_{N \to \infty} \frac{E_N}{N} \cdot f_{\text{clk}} = \left( \lim_{N \to \infty} \frac{n(N)}{N} \right) \cdot C_L \cdot V_{\text{dd}}^2 \cdot f_{\text{clk}}
+\end{align*}
+$$
+
+We can further define the **activity factor** $$\alpha_{0\to1}$$ as follows,
+
+$$
+\begin{align*}
+\alpha_{0 \to 1} &= \lim_{N \to \infty} \frac{n(N)}{N}
+\end{align*}
+$$
+
+And now, we can rewrite our average power $$P_{\text{avg}}$$ as follows,
+
+$$
+\begin{align*}
+P_{\text{avg}} &= \alpha_{0 \to 1} \cdot C_L \cdot V_{\text{dd}}^2 \cdot f_{\text{clk}}
+\end{align*}
+$$
+
+#### CMOS Inverter Propagation Delay
+
+In the [#transient-response](lec-02-cmos-inverter.md#transient-response "mention") analysis, we have already seen how to calculate the propagation delay of a CMOS inverter when we know the NMOS/PMOS **on-resistance** as well as the capacitance $$C_L$$. Now, we introduce the second method to know the propagation delay if we don't know the **on-resistance**, but know the **average current** I<sub>av</sub> in the circuit.
+
+Starting with $$i = C \frac{dv}{dt}$$, move $$dt$$ to the L.H.S and integrate both sides:
+
+$$
+\begin{align*}
+i ~ dt &= C ~ dv
+\end{align*}
+$$
+
+Integrate from initial to final conditions, where $$v$$ goes from $$v_1$$ to $$v_2$$ and time $$t_p$$ is the propagation delay:
+
+$$
+\begin{align*}
+\int_0^{t_p} i(t)~dt &= \int_{v_1}^{v_2} C~dv
+\end{align*}
+$$
+
+Since $$C = C_L$$ is constant, factor it out:
+
+$$
+\begin{align*}
+C_L \int_0^{t_p} i(t)~dt &= C_L \int_{v_1}^{v_2}1~dv
+\end{align*}
+$$
+
+The right-hand side integrates to the voltage difference:
+
+$$
+\begin{align*}
+C_L \int_0^{t_p} i(t)~dt &= C_L (v_2 - v_1)
+\end{align*}
+$$
+
+The left-hand side represents the charge transferred, and since $$I_{\text{av}} = \frac{1}{t_p} \int_0^{t_p} i(t)~dt$$, substitute $$I_{\text{av}} \cdot t_p$$:
+
+$$
+\begin{align*}
+I_{\text{av}} \cdot t_p &= C_L (v_2 - v_1)
+\end{align*}
+$$
+
+Solve for $$t_p$$:
+
+$$
+\begin{align*}
+t_p &= \frac{C_L (v_2 - v_1)}{I_{\text{av}}}
+\end{align*}
+$$
+
+For the high-to-low propagation delay $$t_{\text{PHL}}$$, $$v_2 - v_1 = V_{\text{swing}}$$ (full swing from $$V_{\text{DD}}$$ to 0, but noting $$t_p$$ is 50% of full swing), so we have:
+
+$$
+t_{\text{PHL}} = \frac{C_L V_{\text{swing}}/2}{I_{\text{av}}}
+$$
 
 [^1]: For V<sub>out</sub> to be **high**, the acceptable range of V<sub>in</sub>
 

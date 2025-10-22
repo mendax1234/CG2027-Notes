@@ -254,7 +254,7 @@ The Bipolar Junction Transistor (BJT) has two **pn-junctions**: the emitter-base
 
 ## MOSFETs
 
-The metal-oxide-semiconductor field-effect transistor (MOSFET, or MOS, for short) is certainly the workhorse of contemporary digital design. Its major asset, from a digital perspective, is that is performs very well as a **switch.**
+The metal-oxide-semiconductor field-effect transistor (MOSFET, or MOS, for short) is certainly the workhorse of contemporary digital design. Its major asset, from a digital perspective, is that is performs very well as a **switch** with an **infinite off-resistance** (for |V<sub>GS</sub>| < |V<sub>TH</sub>|) and a **finite on-resistance** (for |V<sub>GS</sub>| < |V<sub>TH</sub>|).
 
 <figure><img src="../.gitbook/assets/mos-as-switch.png" alt="" width="563"><figcaption></figcaption></figure>
 
@@ -337,7 +337,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 1. The threshold voltage, V<sub>T</sub>, is the gate-source voltage at which channel is formed.
    1. The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
-   1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <= |V<sub>TH</sub>|
+   1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <i class="fa-less-than-equal">:less-than-equal:</i> |V<sub>TH</sub>|
    2. The **pinch-off** condition: V<sub>GS</sub> - V<sub>DS</sub> = V<sub>GD</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TH</sub>.
    3. The **linear region** condition: V<sub>GS</sub> - V(x) > V<sub>TH</sub>, where V(x) is the voltage at any point x in the channel.
    4. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
@@ -564,7 +564,7 @@ PMOS is just the opposite of NMOS, where the source-body-drain change to "pnp" a
 
 <figure><img src="../.gitbook/assets/pmos-illustration.png" alt="" width="563"><figcaption></figcaption></figure>
 
-As we mentioned earily, the [**rule of thumb**](https://wenbo-notes.gitbook.io/cg2027-notes/lec/lec-01-the-devices#notes) to determine the state of PMOS and NMOS is to see the relationship between |V<sub>GS</sub>|, |V<sub>TH</sub>| and |V<sub>GD</sub>|.
+As we mentioned earily, the [**rule of thumb**](https://wenbo-notes.gitbook.io/cg2027-notes/lec/lec-01-the-devices#notes) to determine the state of PMOS and NMOS is to see the relationship between |V<sub>GS</sub>| and |V<sub>TH</sub>| to determine the ON and OFF of the PMOS. And the relationship between V<sub>GS</sub> - V<sub>DS</sub> = V<sub>GD</sub> and V<sub>TH</sub> is to determine the saturation region of the PMOS.
 
 When the _p-_&#x63;hannel is formed, since the electric field is from **source to drain**, the electrons will move from **drain to source**, causing the holes to move from **source to drain** through the _p-_&#x63;hannel. Thus the current flows from **source to drain**. So, we can again think of the source as providing **holes** and the drain is consuming **holes**. And eveything will work similarly.
 
