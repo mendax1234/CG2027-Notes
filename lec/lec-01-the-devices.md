@@ -207,7 +207,7 @@ But if we dope silicon with the element **phosphorus** (which is element #15), p
 
 Similarly, if we dope silicon with the element **Boron** (which has 3 valence electrons), Boron's 3 outermost electrons can form **covalent bonds** with silicon, but this leaves an incomplete bond, which forms a **hole**. However, other electrons can move into this hole. Because another electron moved in, it is equivalent to the hole moving to a different location. At this point, the conductivity of this boron-doped silicon will also increase, and this type of doping is called _p-_&#x74;ype doping. Therefore, in _p-_&#x74;ype material, the charge carriers are **holes**.
 
-<figure><img src="../.gitbook/assets/p-type-doping.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/p-type-doping.png" alt="" width="563"><figcaption></figcaption></figure>
 {% endstep %}
 {% endstepper %}
 
@@ -304,8 +304,8 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 
 <figure><img src="../.gitbook/assets/nmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
-* Source is usually connected to ground (0V)
-* V<sub>T</sub> is positive.
+* Source and body are usually connected to ground (0V)
+* V<sub>T</sub> is **positive**.
 * When V<sub>GS</sub> $$\geq$$ V<sub>T</sub>, device is on.
 * Linear region of operation: 0 < V<sub>DS</sub> < V<sub>GS</sub> - V<sub>T</sub>
 * V<sub>Dsat</sub> = V<sub>GS</sub> - V<sub>T</sub>
@@ -322,9 +322,9 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 
 <figure><img src="../.gitbook/assets/pmos-schematic.png" alt=""><figcaption></figcaption></figure>
 
-* Source is usually connected to V<sub>DD</sub>
+* Source and body are usually connected to V<sub>DD</sub>
 * Drain is **not** usually connected to ground (0V).
-* V<sub>T</sub> is negative.
+* V<sub>T</sub> is **negative**.
 * When V<sub>GS</sub> $$\leq$$ V<sub>T</sub>, device is on.
 * Linear region of operation: 0 > V<sub>DS</sub> > V<sub>GS</sub> - V<sub>T</sub>
 * V<sub>Dsat</sub> = V<sub>GS</sub> - V<sub>T</sub>
@@ -338,8 +338,8 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
    1. The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
    1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <= |V<sub>TH</sub>|
-   2. Pinch-off or saturation happens if |V<sub>GD</sub>| < |V<sub>TH</sub>|.
-   3. Linear region appears when |V<sub>GS</sub>| > 0 and |V<sub>GD</sub>| > |V<sub>TH</sub>|.
+   2. The **pinch-off** condition: V<sub>GS</sub> - V<sub>DS</sub> = V<sub>GD</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TH</sub>.
+   3. The **linear region** condition: V<sub>GS</sub> - V(x) > V<sub>TH</sub>, where V(x) is the voltage at any point x in the channel.
    4. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
 {% endhint %}
 
@@ -372,12 +372,14 @@ After that,
 
 So now, as V<sub>DS</sub> > 0, and there is an **n-channel** in between source and drain, as we have written above, the current will flow **from drain to source**.
 
-And again, what happens physically is that:&#x20;
+<figure><img src="../.gitbook/assets/linear-region.png" alt="" width="563"><figcaption></figcaption></figure>
+
+At point x along the channel, the voltage is V(x), and the gate-to-channel voltage at that point equals V<sub>GS</sub> - V(x). We assume that under linear region, this voltage **exceeds** the **threshold voltage** all along the channel. So again, what happens physically here is that:&#x20;
 
 * Within the NMOS, a conductive **n-type channel** is formed between the **source** and **drain**.
 * When V<sub>DS</sub>​ (drain-to-source voltage) is small, the entire channel is uniformly formed — electrons can move easily.
 * As V<sub>DS</sub>​ increases slightly, the **electric field** pushes more electrons, and **current I**<sub>**D**</sub>**​** increases **proportionally** (Ohm's law). This is valid only for **small values of V**<sub>**DS**</sub>.
-* This is called **linear region** or **ohmic region** of a MOSFET.
+* This is called **linear region** or **resistive region** of a MOSFET.
 
 {% hint style="success" %}
 "Region" means a range of V<sub>GS</sub> and V<sub>DS</sub> values where the MOSFET shows a specific physical behavior and current-voltage or I-V relationship.
@@ -385,7 +387,7 @@ And again, what happens physically is that:&#x20;
 
 #### In between linear and saturation
 
-Now, as we have already fixed the V<sub>GS</sub> and start increasing the V<sub>DS</sub>, we increase V<sub>DS</sub> until V<sub>DS</sub> = V<sub>GS</sub>-V<sub>TH</sub>.
+Now, as we have already fixed the V<sub>GS</sub> and start increasing the V<sub>DS</sub>, we increase V<sub>DS</sub> until V<sub>DS</sub> = V<sub>GS</sub>-V<sub>TH</sub>. As the value of drain-source voltage V<sub>DS</sub> is further increased, the assumption that the channel voltage is larger than the threshold all along the channel ceases to hold. This happens when V<sub>GS</sub> - V(x) < V<sub>TH</sub>. At that point, the induced charge is zero, and the conducting channel disappears or is **pinched-off**.
 
 <figure><img src="../.gitbook/assets/nmos-in-between-linear-saturation.png" alt="" width="563"><figcaption></figcaption></figure>
 
