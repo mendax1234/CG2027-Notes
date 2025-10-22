@@ -420,6 +420,44 @@ $$
 t_{\text{PHL}} = \frac{C_L V_{\text{swing}}/2}{I_{\text{av}}}
 $$
 
+## Load Capacitance / Resistance
+
+### Load Capacitance Estimation
+
+When a CMOS gate **drives** another CMOS gate, the driver "sees" a [**capacitive load**](#user-content-fn-6)[^6]. The load capacitance consists of
+
+1. **gate capacitance** of the load from two MOSFETS on the right (C<sub>g</sub>)
+2. **junction capacitance** from common **drain** of the driver inverter on the left (C<sub>j</sub>), and
+3. the **parastic routing capacitance** from the metal line used for connection (C<sub>w</sub>)
+
+<figure><img src="../.gitbook/assets/load-capacitance-definition.png" alt="" width="375"><figcaption></figcaption></figure>
+
+In other words, the **load capacitcance** is
+
+$$
+C_L=C_g+C_j+C_w
+$$
+
+#### Transistor
+
+{% stepper %}
+{% step %}
+#### Gate Capacitance
+
+Gate capacitances estimation in different regions is below. However many times **a constant value** is used.
+
+<figure><img src="../.gitbook/assets/load-capacitance-estimation-transistor.png" alt="" width="362"><figcaption></figcaption></figure>
+
+| Parameter  | Off                                   | Linear                                 | Saturation                              |
+| ---------- | ------------------------------------- | -------------------------------------- | --------------------------------------- |
+| $$C_{gb}$$ | $$\frac{\epsilon_{sio_2} A}{t_{ox}}$$ | 0                                      | 0                                       |
+| $$C_{gs}$$ | 0                                     | $$\frac{\epsilon_{sio_2} A}{2t_{ox}}$$ | $$\frac{2\epsilon_{sio_2} A}{3t_{ox}}$$ |
+| $$C_{gd}$$ | 0                                     | $$\frac{\epsilon_{sio_2} A}{2t_{ox}}$$ | 0                                       |
+
+In this table, $$\epsilon_{sio_2}=\epsilon_o\cdot\epsilon_v$$, and $$A$$ is the area, which is the same as $$W\cdot L$$.
+{% endstep %}
+{% endstepper %}
+
 [^1]: For V<sub>out</sub> to be **high**, the acceptable range of V<sub>in</sub>
 
 [^2]: For V<sub>out</sub> to be **low**, the acceptable range of V<sub>in</sub>
@@ -429,3 +467,5 @@ $$
 [^4]: the current that flows directly from V<sub>DD</sub> to Ground
 
 [^5]: one of the main sources of **leakage current**, which is a tiny amount of current that leaks through the device when it is idle.
+
+[^6]: This is the $$C_L$$ we used in all our previous sections.
