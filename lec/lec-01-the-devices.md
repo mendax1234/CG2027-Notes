@@ -339,7 +339,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
    1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <i class="fa-less-than-equal">:less-than-equal:</i> |V<sub>TH</sub>|
    2. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
-   3. For the determine the **linear region** or the **saturation region**, we must strictly following the following table.
+   3. For the determine the **linear region** or the **saturation region**, we must strictly following the following table. The V<sub>GS</sub> and V<sub>TH</sub> relationship we can use the **absolute thinking** mentioned above. For the V<sub>DS</sub>, V<sub>GS</sub> and V<sub>TH</sub>, we can use the [I-V characteristcs](lec-01-the-devices.md#output-characteristic) diagram introduced later!
 {% endhint %}
 
 <figure><img src="../.gitbook/assets/cmos-region reference table.png" alt=""><figcaption></figcaption></figure>
@@ -436,7 +436,7 @@ In summary, we have the following table summarizing the above 5 stages of NMOS.
 | $$V_{GS} \approx V_{TH}$$                                | **Boundary between Cutoff and Linear**     | Channel **just starts to form** (weak inversion); small leakage current begins      | $$I_D$$ rises exponentially with $$V_{GS}$$ (subthreshold conduction) |
 | $$V_{GS} > V_{TH}$$ and $$0 < V_{DS} < V_{GS} - V_{TH}$$ | **Linear (Ohmic)**                         | Channel fully formed and uniform; acts like voltage-controlled resistor             | $$I_D =f(V_{DS}, V_{GS})$$                                            |
 | $$V_{DS} = V_{GS} - V_{TH}$$                             | **Boundary between Linear and Saturation** | Channel begins to pinch off at the drain end                                        | Marks start of current saturation                                     |
-| $$V_{DS} > V_{GS} - V_{TH}$$                             | **Saturation (Active)**                    | Channel pinched off near drain; current nearly constant (independent of $$V_{DS}$$) | $$I_D =f(V_{GS})$$                                                    |
+| $$V_{GS} > V_{TH}$$ and $$V_{DS} > V_{GS} - V_{TH}$$     | **Saturation (Active)**                    | Channel pinched off near drain; current nearly constant (independent of $$V_{DS}$$) | $$I_D =f(V_{GS})$$                                                    |
 
 <details>
 
@@ -521,6 +521,15 @@ In summary, below is the NMOS and PMOS I-V characteristics (i<sub>D</sub> and V<
 
 <figure><img src="../.gitbook/assets/nmos-pmos-iv-characteristics.png" alt=""><figcaption></figcaption></figure>
 
+To put this diagram together, we have the following
+
+<figure><img src="../.gitbook/assets/iv-diagram-nmos-pmos.png" alt="" width="563"><figcaption></figcaption></figure>
+
+From this we can see that, if we fix our VGS, and increase the magnitude of the VDS, the PMOS/NMOS will enter the saturation region. Respectively speaking,
+
+1. For NMOS, if we increase VDS, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> > V<sub>GS</sub> - V<sub>TN</sub>, which is the same as V<sub>GD</sub> < V<sub>TN</sub>.
+2. For PMOS, if we decrease VDS, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> < V<sub>GS</sub> - V<sub>TP</sub>, which is the same as V<sub>GD</sub> > V<sub>TP</sub>.
+
 #### Transfer characteristic
 
 If we draw the I-V characteristics between the V<sub>GS</sub> and i<sub>D</sub>, we will find that after V<sub>GS</sub> exceeds beyond V<sub>TH</sub>, i<sub>D</sub> will increase **quadratically** as V<sub>GS</sub> increases. This is called **transferred characteristics**, where i<sub>D</sub> versus V<sub>GS</sub> at a given fixed V<sub>DS</sub> value (V<sub>DS</sub> is chosen so that the MOSFET is in **saturation region**).
@@ -554,24 +563,6 @@ Great thanks to my tutor **juezhao**, the following two videos from YouTube expl
 Besides the above, the following video from Bilibili is also awesome!
 
 {% embed url="https://www.bilibili.com/video/BV1nL411x7jH/?share_source=copy_web&vd_source=38953bcabbabbab600e123d8740d5a8a" %}
-
-### PMOS
-
-In NMOS, we have seen that the gate is connected to a **positive voltage** and the source and body are connected to **ground** or **negative voltage**, as shown as follows,
-
-<figure><img src="../.gitbook/assets/nmos-illustration.png" alt="" width="563"><figcaption></figcaption></figure>
-
-{% hint style="warning" %}
-Treat the `----` as ground in the image above. But by right, if you treat it as negative also can.
-{% endhint %}
-
-PMOS is just the opposite of NMOS, where the source-body-drain change to "pnp" and the gate is connected to **ground** or **negative voltage** while the body and source and body are connected to **positive voltage**, just as shown as follows,
-
-<figure><img src="../.gitbook/assets/pmos-illustration.png" alt="" width="563"><figcaption></figcaption></figure>
-
-As we mentioned earily, the [**rule of thumb**](https://wenbo-notes.gitbook.io/cg2027-notes/lec/lec-01-the-devices#notes) to determine the state of PMOS and NMOS is to see the relationship between |V<sub>GS</sub>| and |V<sub>TH</sub>| to determine the ON and OFF of the PMOS. And the relationship between V<sub>GS</sub> - V<sub>DS</sub> = V<sub>GD</sub> and V<sub>TH</sub> is to determine the saturation region of the PMOS.
-
-When the _p-_&#x63;hannel is formed, since the electric field is from **source to drain**, the electrons will move from **drain to source**, causing the holes to move from **source to drain** through the _p-_&#x63;hannel. Thus the current flows from **source to drain**. So, we can again think of the source as providing **holes** and the drain is consuming **holes**. And eveything will work similarly.
 
 [^1]: "holes" refers to electron holes, which are quasiparticles representing the absence of an electron in a material like a semiconductor. These holes act as **positive charge** carriers and are crucial for modern electronics, such as diodes and transistors.
 
