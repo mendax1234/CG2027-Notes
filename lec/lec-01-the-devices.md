@@ -338,9 +338,14 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
    1. The **channel** in a MOSFET is the path that allows current to flow between the source and the drain — under the gate oxide layer. It forms inside the semiconductor substrate (usually silicon) when we apply a voltage to the gate.
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
    1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <i class="fa-less-than-equal">:less-than-equal:</i> |V<sub>TH</sub>|
-   2. The **pinch-off** condition: V<sub>GS</sub> - V<sub>DS</sub> = V<sub>GD</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TH</sub>.
-   3. The **linear region** condition: V<sub>GS</sub> - V(x) > V<sub>TH</sub>, where V(x) is the voltage at any point x in the channel.
-   4. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
+   2. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
+   3. For the determine the **linear region** or the **saturation region**, we must strictly following the following table.
+{% endhint %}
+
+<figure><img src="../.gitbook/assets/cmos-region reference table.png" alt=""><figcaption></figcaption></figure>
+
+{% hint style="success" %}
+We can understand the condition for the NMOS and then flip all the signs when dealing with PMOS.
 {% endhint %}
 
 For the sake of simplicity, in this course, we will use NMOS as an example. And thus the following sections will be based on NMOS. The PMOS equivalent will be left as an exercise to the reader.

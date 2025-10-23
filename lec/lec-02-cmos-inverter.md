@@ -114,20 +114,20 @@ To understand it more clearly, let's use the following example,
 
 <figure><img src="../.gitbook/assets/cmos-inverter-switching-characteristic.jpg" alt=""><figcaption></figcaption></figure>
 
-Suppose V<sub>TN</sub> = 0.3V, V<sub>TP</sub> = -0.4V, V<sub>DD</sub> = 1V and V<sub>inv</sub> = 0.5V
+Suppose V<sub>TN</sub> = 0.3V, V<sub>TP</sub> = -0.3V, V<sub>DD</sub> = 1V and V<sub>inv</sub> = 0.5V
 
-1. 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TN</sub> -> 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> 0.4: Let's take V<sub>in</sub> = 0.2V and assume Vout = 1V.
+1. 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>TN</sub> -> 0 <i class="fa-less-than-equal">:less-than-equal:</i> V<sub>in</sub> <i class="fa-less-than-equal">:less-than-equal:</i> 0.3: Let's take V<sub>in</sub> = 0.2V and assume Vout = 1V.
    1. NMOS: |V<sub>GS</sub>| < |V<sub>TN</sub>|, NMOS is OFF.
-   2. PMOS: |V<sub>GS</sub>| <i class="fa-greater-than-equal">:greater-than-equal:</i> 0.6V > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.8V < V<sub>TP</sub>, PMOS in **saturation region**.
-2. V<sub>TN</sub> < V<sub>in</sub> < V<sub>inv</sub> -> 0.4 < V<sub>in</sub> < 0.5: Let's take V<sub>in</sub> = 0.45V and assume V<sub>out</sub> drops a bit but is still high, is 0.8V.
-   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = -0.35V < V<sub>TN</sub>, NMOS operates in **saturation** **region**.
-   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.35V > V<sub>TP</sub>, PMOS operates in **linear** **region.**
+   2. PMOS: |V<sub>GS</sub>| <i class="fa-greater-than-equal">:greater-than-equal:</i> 0.7V > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.8V < V<sub>TP</sub>, PMOS in **linear region**.
+2. V<sub>TN</sub> < V<sub>in</sub> < V<sub>inv</sub> -> 0.4 < V<sub>in</sub> < 0.5: Let's take V<sub>in</sub> = 0.45V and assume V<sub>out</sub> drops a bit but is still high, is 0.9V.
+   1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = -0.45V < V<sub>TN</sub>, NMOS operates in **saturation** **region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = -0.45V < V<sub>TP</sub>, PMOS operates in **linear** **region.**
 3. V<sub>in</sub> = V<sub>inv</sub>: Let's say V<sub>in</sub> = 0.5V and V<sub>out</sub> = 0.5V
    1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is still on. V<sub>GD</sub> = 0 < V<sub>TN</sub>, NMOS operates in **saturation region**.
-   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is still on. V<sub>GD</sub> = 0 > V<sub>TP</sub>, PMOS operates in **linear region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is still on. V<sub>GD</sub> = 0 > V<sub>TP</sub>, PMOS operates in **saturation region**.
 4. V<sub>inv</sub> < V<sub>in</sub> < V<sub>DD</sub> - |V<sub>TP</sub>| -> 0.5 < V<sub>in</sub> < 0.6V. Let's take V<sub>in</sub> = 0.55V and assume V<sub>out</sub> is 0.2V.
    1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = 0.35V > V<sub>TN</sub>, NMOS operates in **linear region**.
-   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = 0.35V > V<sub>TP</sub>, PMOS operates in **linear region**.
+   2. PMOS: |V<sub>GS</sub>| > |V<sub>TP</sub>|, PMOS is ON. V<sub>GD</sub> = 0.35V > V<sub>TP</sub>, PMOS operates in **saturation region**.
 5. V<sub>DD</sub> - |V<sub>TP</sub>| < V<sub>in</sub> < V<sub>DD</sub> -> 0.6 < V<sub>in</sub> < 1. Let's take V<sub>in</sub> = 0.75V and assum V<sub>out</sub> is 0V.
    1. NMOS: |V<sub>GS</sub>| > |V<sub>TN</sub>|, NMOS is ON. V<sub>GD</sub> = 0.75V > V<sub>TN</sub>, NMOS operates in **linear region**.
    2. PMOS: |V<sub>GS</sub>| < |V<sub>TP</sub>|, PMOS is OFF.
@@ -135,6 +135,13 @@ Suppose V<sub>TN</sub> = 0.3V, V<sub>TP</sub> = -0.4V, V<sub>DD</sub> = 1V and V
 {% hint style="success" %}
 V<sub>in</sub> is the gate voltage V<sub>G</sub> here.
 {% endhint %}
+
+The above calculation is based on the following table we have introduced in Lec 01. As for the CMOS inverter case,
+
+* For **NMOS**: V<sub>gsn</sub> = V<sub>in</sub>, V<sub>dsn</sub> = V<sub>out</sub>.
+* For PMOS: V<sub>gsp</sub> = V<sub>in</sub> - V<sub>DD</sub>, V<sub>dsn</sub> = V<sub>in</sub> - V<sub>DD</sub>.
+
+<figure><img src="../.gitbook/assets/cmos-region reference table.png" alt=""><figcaption></figcaption></figure>
 
 To summarize the five regions of operations together into one image, we have the following VTC of CMOS inverter
 
