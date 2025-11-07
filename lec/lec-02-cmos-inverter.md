@@ -68,8 +68,8 @@ Prof. Annie also introduces the following analogy for NM<sub>H</sub> and NM<sub>
 
 From the above image, we can clearly see that
 
-1. **Fan-in** means how many **inputs** a gate has, it describes the number of signals feeding **into** one logic gate
-2. **Fan-out** means How many **inputs** are driven by one output the number of gates that one output signal can **drive**.
+1. **Fan-out** means how many **inputs** are driven by one output the number of gates that one output signal can **drive**.
+2. **Fan-in** means how many **inputs** a gate has, it describes the number of signals feeding **into** one logic gate.
 
 ## CMOS Inverter
 
@@ -138,7 +138,7 @@ V<sub>in</sub> is the gate voltage V<sub>G</sub> here.
 
 The above calculation is based on the following table we have introduced in Lec 01. As for the CMOS inverter case,
 
-* For **NMOS**: V<sub>gsn</sub> = V<sub>in</sub>, V<sub>dsn</sub> = V<sub>out</sub>.
+* For NMOS: V<sub>gsn</sub> = V<sub>in</sub>, V<sub>dsn</sub> = V<sub>out</sub>.
 * For PMOS: V<sub>gsp</sub> = V<sub>in</sub> - V<sub>DD</sub>, V<sub>dsn</sub> = V<sub>in</sub> - V<sub>DD</sub>.
 
 <figure><img src="../.gitbook/assets/cmos-region reference table.png" alt=""><figcaption></figcaption></figure>
@@ -153,7 +153,7 @@ Now, we can draw the [short-circuit current](#user-content-fn-4)[^4] (I<sub>inv<
 
 From the graph above, we can see that the CMOS **seems to** only consume power when **switching**.
 
-However, as I use "seems to" above, means that in reality, due to [**sub-threshold currents**](#user-content-fn-5)[^5], etc, their is still some power consumption when the CMOS inverter is in OFF state.
+However, as I use "seems to" above, means that in reality, due to [**sub-threshold currents**](#user-content-fn-5)[^5], etc, there is still some power consumption when the CMOS inverter is in OFF state.
 
 ### Inverter with a Load
 
@@ -161,7 +161,7 @@ Normally, CMOS inverter will have parastic resistances and capacitances attached
 
 <figure><img src="../.gitbook/assets/inverter-with-load-with-timing-diagram.png" alt=""><figcaption></figcaption></figure>
 
-These time delay appear because **charging** and **discharging** the capacitor attached to the output node takes time! (CG1111A again!)
+These time delays appear because **charging** and **discharging** the capacitor attached to the output node takes time! (CG1111A again!)
 
 {% columns %}
 {% column %}
