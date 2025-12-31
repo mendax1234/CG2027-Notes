@@ -514,6 +514,15 @@ $$
 {% hint style="info" %}
 The saturation region is where the analog integrated design comes in.
 {% endhint %}
+
+<details>
+
+<summary>More on Capacitance</summary>
+
+1. $$C_{ox}=\frac{\epsilon_0\epsilon_r}{t_{ox}}$$, where $$t_{ox}$$ is the thickness of the gate oxide. And sometimes $$\epsilon_0\epsilon_r$$ will be written as $$\epsilon_{ox}$$. They are the same.
+2. The gate capacitance: $$C_{\text{gate}}=C_{ox}\cdot W\cdot L=\frac{\epsilon_{ox}}{t_{ox}}\cdot W\cdot L$$.
+
+</details>
 {% endstep %}
 {% endstepper %}
 
@@ -525,10 +534,10 @@ To put this diagram together, we have the following
 
 <figure><img src="../.gitbook/assets/iv-diagram-nmos-pmos.png" alt="" width="563"><figcaption></figcaption></figure>
 
-From this we can see that, if we fix our VGS, and increase the magnitude of the VDS, the PMOS/NMOS will enter the saturation region. Respectively speaking,
+From this we can see that, if we fix our V<sub>GS</sub>, and increase the magnitude of the V<sub>DS</sub>, the PMOS/NMOS will enter the saturation region. Respectively speaking,
 
-1. For NMOS, if we increase VDS, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> > V<sub>GS</sub> - V<sub>TN</sub>, which is the same as V<sub>GD</sub> < V<sub>TN</sub>.
-2. For PMOS, if we decrease VDS, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> < V<sub>GS</sub> - V<sub>TP</sub>, which is the same as V<sub>GD</sub> > V<sub>TP</sub>.
+1. For NMOS, if we increase V<sub>DS</sub>, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> > V<sub>GS</sub> - V<sub>TN</sub>, which is the same as V<sub>GD</sub> < V<sub>TN</sub>.
+2. For PMOS, if we decrease V<sub>DS</sub>, we will enter the saturation region -> one of the conditions for saturation is V<sub>DS</sub> < V<sub>GS</sub> - V<sub>TP</sub>, which is the same as V<sub>GD</sub> > V<sub>TP</sub>.
 
 #### Transfer characteristic
 
@@ -550,6 +559,40 @@ For example, the following is the diagram showing the **height**, **width** and 
 
 <figure><img src="../.gitbook/assets/finfet.png" alt="" width="420"><figcaption><p>FinFet length, width and height</p></figcaption></figure>
 
+## Misc
+
+### Timing Diagram
+
+In CG2027, only the following 4 terms will be covered and included in the final test. Thus, knowing how to calculate each of them will be necessary for succeed in this course.
+
+<figure><img src="../.gitbook/assets/timing-diagram.png" alt="" width="563"><figcaption></figcaption></figure>
+
+1. t<sub>PHL</sub>: output high to low but related to input's effect on output; see the 50% point of V<sub>out</sub> and V<sub>in</sub>
+2. t<sub>PLH</sub>: output low to high but related to input's effect on output; also look at the 50% point of V<sub>out</sub> and V<sub>in</sub>
+3. t<sub>f</sub>: output high to low, look at output only; 10% and 90% point of V<sub>out</sub>
+4. t<sub>r</sub>: output low to high, look at output only; 10% and 90% point of V<sub>out</sub>
+
+### Unit Table
+
+In the final, memorize the unit table is necessary for some questions!
+
+| Factor | Name  | Symbol |
+| ------ | ----- | ------ |
+| 10⁹    | Giga  | G      |
+| 10⁶    | Mega  | M      |
+| 10³    | Kilo  | k      |
+| 10²    | Hecto | h      |
+| 10¹    | Deca  | da     |
+| 10⁻¹   | Deci  | d      |
+| 10⁻²   | Centi | c      |
+| 10⁻³   | Milli | m      |
+| 10⁻⁶   | Micro | µ      |
+| 10⁻⁹   | Nano  | n      |
+| 10⁻¹²  | Pico  | p      |
+| 10⁻¹⁵  | Femto | f      |
+| 10⁻¹⁸  | Atto  | a      |
+| 10⁻²¹  | Zepto | z      |
+
 ## Homework
 
 ### Some awesome videos
@@ -560,7 +603,7 @@ Great thanks to my tutor **juezhao**, the following two videos from YouTube expl
 
 {% embed url="https://www.youtube.com/watch?v=rkbjHNEKcRw" %}
 
-Besides the above, the following video from Bilibili is also awesome!
+Besides the above, the following video from bilibili is also awesome!
 
 {% embed url="https://www.bilibili.com/video/BV1nL411x7jH/?share_source=copy_web&vd_source=38953bcabbabbab600e123d8740d5a8a" %}
 

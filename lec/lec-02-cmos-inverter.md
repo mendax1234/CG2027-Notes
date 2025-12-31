@@ -307,7 +307,7 @@ Evaluate the integral:
 
 $$
 \begin{align*}
-\int_0^{V_{\text{DD}}} v~dv &= \left[ \frac{1}{2} v^2 \right]0^{V{\text{DD}}} = \frac{1}{2} V_{\text{DD}}^2 - 0 = \frac{1}{2} V_{\text{DD}}^2.
+\int_0^{V_{\text{DD}}} v~dv &= \left[ \frac{1}{2} v^2 \right]_0^{V{\text{DD}}} = \frac{1}{2} V_{\text{DD}}^2 - 0 = \frac{1}{2} V_{\text{DD}}^2.
 \end{align*}
 $$
 
@@ -463,7 +463,37 @@ Gate capacitances estimation in different regions is below. However many times *
 
 In this table, $$\epsilon_{sio_2}=\epsilon_o\cdot\epsilon_v$$, and $$A$$ is the area, which is the same as $$W\cdot L$$.
 {% endstep %}
+
+{% step %}
+#### Wire Capacitance
+
+$$
+C_{\text{wire}}=C_{pp}+C_{\text{fringe}}
+$$
+
+$$C_{pp}$$ is the same as $$C_{\text{area}}$$, which can be calculated using
+
+$$
+C_{\text{area}}=C_{\text{per unit area}}\cdot W\cdot L \tag{1}
+$$
+
+where, $$C_{\text{per unit area}}=\frac{\epsilon}{t}$$, and $$\epsilon$$ is the **electron mobility** and $$t$$ is the thickness. However, the $$C_{\text{per unit area}}$$ will usually be given.
+
+{% hint style="info" %}
+The Eq. (1) applies to **any capacitance** calculation.
+{% endhint %}
+{% endstep %}
 {% endstepper %}
+
+### Load Resistance
+
+To calculate the resistance, we can use the following formula
+
+$$
+R=\frac{\rho\cdot L}{H\cdot W}
+$$
+
+where we treat $$\frac{\rho}{H}$$ as a whole and name it as **sheet resistance** with the unit ( $$\Omega/\square$$) and $$\frac{L}{W}$$ has the unit of $$\square$$ and they **must** be converted to the same unit before the division!
 
 [^1]: For V<sub>out</sub> to be **high**, the acceptable range of V<sub>in</sub>
 

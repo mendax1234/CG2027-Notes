@@ -6,6 +6,7 @@
 
 * [Lec 01 - The Devices](lec/lec-01-the-devices.md)
 * [Lec 02 - CMOS Inverter](lec/lec-02-cmos-inverter.md)
+* [Lec 03 - CMOS Logic](lec/lec-03-cmos-logic.md)
 
 ## Tut
 
