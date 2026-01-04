@@ -50,45 +50,89 @@ We do not write to every bit cell in a Word Line every time it is accessed. Even
 
 ## SRAM
 
-We start from the **bistable element**. The following is a classic **bistable element**. If Q is 1, meaning that 1 is stored. Otherwise, 0 is stored.
+We start with the **bistable element**. The following is a classic bistable circuit composed of two cross-coupled inverters. If $$Q$$ is 1,
 
 <figure><img src="../.gitbook/assets/bistable-element.png" alt=""><figcaption></figcaption></figure>
 
-This bistable element can store 1-bit information. But the problem is how do we write information in it? We can use this bistable element to built the bit cell for **SRAM**!
+This bistable element can store 1 bit of information. However, the problem is: how do we write new information into it? To solve this, we add access transistors to build the **6T SRAM** bit cell shown below:
 
 <figure><img src="../.gitbook/assets/SRAM-bit-cell.png" alt=""><figcaption></figcaption></figure>
 
 ### Read
 
-1. Precharge BL and \bar BL to VDD
-2. Activate one of the WL to high
-3. The info stored in the bistable element will pull down one of the BL/\bar BL
-4. Read the BL to get the information stored.
+1. **Precharge**: Precharge both Bit Lines ($$BL$$ and $$\overline{BL}$$) to $$V_{DD}$$.
+2. **Access**: Activate the Word Line ($$WL$$) to high. This turns on the access transistors ($$M_5$$ and $$M_6$$)
+3. **Sensing:** The internal node storing 0 will pull down the corresponding Bit Line.
+   * For example, if $$\overline{Q} = 0$$, it will pull $$\overline{BL}$$ down towards the ground.
+   * The other side ($$Q=1$$) will leave $$BL$$ at $$V_{DD}$$.
+4. **Output:** A sense amplifier reads the voltage difference between $$BL$$ and $$\overline{BL}$$ to determine the stored bit.
 
-During the read, the pull down that NMOS in the Bistable element should be stronger than the accessor so that \bar Q won't pull down Q, and vice versa.
+#### Read Stability Constraint
+
+During the read operation, a potential problem arises. The Bit Line is precharged to $$V_{DD}$$, and the internal node $$\overline{Q}$$ is at $$0$$. When the access transistor ($$M_5$$) turns on, it forms a voltage divider with the driver transistor ($$M_1$$).
+
+We must ensure that the voltage at node $$\overline{Q}$$ does not rise high enough to flip the state of the other inverter. The driver ($$M_1$$) must be stronger than the access transistor ($$M_5$$).
 
 <figure><img src="../.gitbook/assets/sram-read.png" alt=""><figcaption></figcaption></figure>
 
-Using voltage divider on the M1 and M5, we can write V \bar Q and the constraint as follows:
+We model the transistors as resistors ($$R_{M1}$$ for the driver, $$R_{M5}$$ for the access). Since $$\overline{BL}$$ acts as a voltage source of $$V_{DD}$$, the voltage at node $$\overline{Q}$$ is determined by the voltage divider rule:
 
-As V \bar Q should be low, so RM5 > RM1, we can derive the CR as follows:
+$$
+V_{\overline{Q}} = V_{DD} \times \frac{R_{M1}}{R_{M1} + R_{M5}}
+$$
+
+To prevent the cell from flipping, $$V_{\overline{Q}}$$ must stay below the switching threshold ($$V_{th}$$) of the other inverter ($$M_2/M_4$$):
+
+$$
+V_{DD} \times \frac{R_{M1}}{R_{M1} + R_{M5}} < V_{th}
+$$
+
+Since we want $$V_{\overline{Q}}$$ to be very low, we require $$R_{M1} \ll R_{M5}$$. In transistor design, resistance is inversely proportional to width ($$W$$). Therefore, the Driver ($$M_1$$) must be wider than the Access ($$M_5$$).
+
+This defines the Cell Ratio (CR):
+
+$$
+CR = \frac{(W/L)_{Driver}}{(W/L)_{Access}} = \frac{(W/L)_{1}}{(W/L)_{5}} > 1 \quad (\text{Typically } 1.2 \text{ to } 3)
+$$
 
 {% hint style="info" %}
-Read 0 or 1 are symmetric so CR is also the same!
+Read 0 and Read 1 are symmetric, so the CR requirement applies to both sides!
 {% endhint %}
 
 ### Write
 
-1. Write BL to the value you want 0/1. /bar BL is teh complemented version of BL
-2. Activate the WL and wait for the charge movement
+1. **Drive Bit Lines**: Drive one Bit Line to $$0$$ and the other to $$V_{DD}$$ (depending on the value you want to write).
+   * Example: To write a 0 (when $$Q$$ was previously 1), we force $$BL = 0$$ and $$\overline{BL} = 1$$.
+2. **Access**: Activate the Word Line ($$WL$$).
+3. **Force State**: The access transistor connected to the $$0V$$. Bit Line must overpower the internal PMOS pull-up transistor to flip the cell.
 
-During the write, Rm4 > RM6 (M6 is stronger) so that it can pull down the charges from the BL to change Q&#x20;
+#### Write Ability Constraint
+
+During the write, the access transistor ($$M_6$$) is trying to pull node $$Q$$ down to 0, while the PMOS pull-up transistor ($$M_4$$) is trying to keep it up at $$V_{DD}$$. The access transistor must be stronger.
 
 <figure><img src="../.gitbook/assets/sram-write.png" alt=""><figcaption></figcaption></figure>
 
-The V Q and the constratin can be written as follows:
 
-By solving Rm4 > RM6, we can get the PR as follows
+
+We model the transistors as a voltage divider between the Access Transistor ($$M_6$$, connected to $$0V$$) and the PMOS Pull-Up ($$M_4$$, connected to $$V_{DD}$$).
+
+$$
+V_{Q} = V_{DD} \times \frac{R_{M6}}{R_{M6} + R_{M4}}
+$$
+
+To successfully write a 0, we must pull $$V_Q$$ below the switching threshold ($$V_{th}$$) of the inverter ($$M_1/M_3$$) so the feedback loop flips:
+
+$$
+V_{DD} \times \frac{R_{M6}}{R_{M6} + R_{M4}} < V_{th}
+$$
+
+This implies that $$R_{M6}$$ must be smaller than $$R_{M4}$$ (Access requires lower resistance than Pull-Up). In other words, $$R_{M4}$$ must be very large so that $$V_Q$$ is very low. Therefore, the Access transistor must be stronger (wider) than the PMOS Pull-Up.
+
+This defines the Pull-up Ratio (PR):
+
+$$
+PR = \frac{(W/L)_{Pull-up}}{(W/L)_{Access}} = \frac{(W/L)_{4}}{(W/L)_{6}} < 2
+$$
 
 ## NAND Flash
 
