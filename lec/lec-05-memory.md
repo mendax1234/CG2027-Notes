@@ -6,129 +6,180 @@ The basic cell used in DRAM is shown as follows:
 
 <figure><img src="../.gitbook/assets/dram-cell.png" alt="" width="563"><figcaption></figcaption></figure>
 
-This structure is known as **1T1C** (One transistor one capacitor). At the end of BL, we have a **sense amplifier** (We will talk about its usage later)
+This structure is known as **1T1C** (One Transistor, One Capacitor). At the end of the Bit Line (BL), we have a **sense amplifier** (we will discuss its usage later).
 
 ### Refresh
 
-As we all know, DRAM uses capacitor to store bit information,
+As we know, DRAM uses a capacitor to store bit information:
 
-1. when the capacitor is charged, 1 is stored, its voltage is VDD.
-2. when it is discharged, 0 is stored and its voltage is 0.
+1. When the capacitor is charged, a 1 is stored (voltage $$\approx V_{DD}$$).
+2. When it is discharged, a 0 is stored (voltage $$\approx 0V$$).
 
-As the transistor controlled by WL cannot isolate the capacitor completely, thus having some leakage current, so the charges stored in the capacitor will slowly get away. That's why we need to recharge/refresh the capacitor peirodetically
+Since the access transistor controlled by the Word Line (WL) cannot isolate the capacitor completely, **leakage current** exists. Consequently, the charge stored in the capacitor will slowly leak away. This is why we need to recharge (refresh) the capacitor periodically.
 
 #### Steps to Refresh
 
-1. Preload all the Bit Lines to Vdd/2
-2. Activate one word line (only one at a time) -> NMOS is ON
-3. The sense amplifier at the end of each BL can detect the voltage change at the Bit Line
-   1. If 1 is previously stored, the charge will move from the capacitor to the Bit Line, causing the Bit Line voltage to increase.
-   2. If 0 is previously stored, the charge will move from the Bit Line to the capacitor, causing the Bit Line voltage to drop
-4. Each sense amplifier will sense the voltage change at each bit line
-   1. If voltage is increased, pull up bit line to constant VDD, thus 1 will be refreshed.
-   2. If voltage is decreased, pull down bit line to 0, thus 0 will be refreshed.
+1. **Precharge**: Preload all Bit Lines to $$V_{DD}/2$$.
+2. **Access**: Activate one Word Line (only one at a time) $$\rightarrow$$ The NMOS access transistor turns ON.
+3. **Charge Sharing**: The sense amplifier at the end of each BL detects the voltage change on the Bit Line caused by the capacitor connecting to it.
+   1. If **1** **was** stored: Charge moves from the capacitor to the Bit Line, causing the Bit Line voltage to rise slightly.
+   2. If **0 was** stored: Charge moves from the Bit Line to the capacitor, causing the Bit Line voltage to drop slightly.
+4. **Sensing & Restoration**: The sense amplifier amplifies this small voltage difference.
+   1. If the voltage increased, it pulls the Bit Line up to a constant $$V_{DD}$$. This recharges the capacitor, refreshing the 1.
+   2. If the voltage decreased, it pulls the Bit Line down to $$0V$$. This fully discharges the capacitor, refreshing the 0.
 
 ### Read
 
-After one refresh, the Bit Line voltage is the same as the capacitor voltage (0 or Vdd), thus we just need to read the bit line voltage to know the info (0 or 1) that is stored in the capacitor
+The Read operation in DRAM is **destructive**, meaning the act of reading discharges the cell. Therefore, a "Read" is essentially the same process as the "Refresh" described above. Once the Sense Amplifier has sensed and latched the data (driving the BL to $$0$$ or $$V_{DD}$$), the data is effectively read and restored simultaneously. We simply read the voltage state of the Bit Line.
 
 ### Write
 
-To write a DRAM cell
+To write to a DRAM cell:
 
-1. Refresh the capcitor in the activated word line first
-2. Charge the bit line voltage to the information you want to write (Vdd or 0)
+1. The row is activated, and the sense amplifiers latch the current values (effectively a refresh/read cycle begins).
+2. To write new data, the write driver circuits overpower the sense amplifiers, driving the Bit Lines to the desired value ($$V_{DD}$$ for 1, $$0V$$ for 0).
+3. This forces the capacitor to charge or discharge to the new logic level.
 
 <details>
 
 <summary>Why refresh is needed?</summary>
 
-Because not every time we are writing all the bit cells in the word line. We write some of them, but as the rest are activated. If not refreshed, the information stored will be lost.
+We do not write to every bit cell in a Word Line every time it is accessed. Even if we modify some bits, the remaining cells in that row are activated and connected to the Bit Lines. If the Sense Amplifier did not restore (refresh) their values during this cycle, their stored charge would be lost due to charge sharing. Furthermore, leakage occurs even when rows are not activated, necessitating periodic refresh cycles for the entire array.
 
 </details>
 
+## SRAM
+
+We start from the **bistable element**. The following is a classic **bistable element**. If Q is 1, meaning that 1 is stored. Otherwise, 0 is stored.
+
+<figure><img src="../.gitbook/assets/bistable-element.png" alt=""><figcaption></figcaption></figure>
+
+This bistable element can store 1-bit information. But the problem is how do we write information in it? We can use this bistable element to built the bit cell for **SRAM**!
+
+<figure><img src="../.gitbook/assets/SRAM-bit-cell.png" alt=""><figcaption></figcaption></figure>
+
+### Read
+
+1. Precharge BL and \bar BL to VDD
+2. Activate one of the WL to high
+3. The info stored in the bistable element will pull down one of the BL/\bar BL
+4. Read the BL to get the information stored.
+
+During the read, the pull down that NMOS in the Bistable element should be stronger than the accessor so that \bar Q won't pull down Q, and vice versa.
+
+<figure><img src="../.gitbook/assets/sram-read.png" alt=""><figcaption></figcaption></figure>
+
+Using voltage divider on the M1 and M5, we can write V \bar Q and the constraint as follows:
+
+As V \bar Q should be low, so RM5 > RM1, we can derive the CR as follows:
+
+{% hint style="info" %}
+Read 0 or 1 are symmetric so CR is also the same!
+{% endhint %}
+
+### Write
+
+1. Write BL to the value you want 0/1. /bar BL is teh complemented version of BL
+2. Activate the WL and wait for the charge movement
+
+During the write, Rm4 > RM6 (M6 is stronger) so that it can pull down the charges from the BL to change Q&#x20;
+
+<figure><img src="../.gitbook/assets/sram-write.png" alt=""><figcaption></figcaption></figure>
+
+The V Q and the constratin can be written as follows:
+
+By solving Rm4 > RM6, we can get the PR as follows
+
 ## NAND Flash
 
-The building block of NAND Flash is the floating gate and floating gate transistor. It will be good for us to know their working principles before we start looking at the NAND Flash
+The building blocks of NAND Flash are the **Floating Gate (FG)** and the **Floating Gate Transistor**. It is essential to understand their working principles before analyzing the NAND Flash architecture.
 
 {% stepper %}
 {% step %}
-#### Floating Gate
+#### Floating Gate Physics
 
-Giving an electric field, strong enough. The quantum tunneling effect happens, electrons pass through the insulator to be stored in the conductor.
+If a sufficiently strong electric field is applied, the **Fowler-Nordheim (FN) Tunneling** effect occurs: electrons pass through the oxide insulator and get trapped in the conductive floating gate.
 
-After that, if another strong electric field is given in the opposite direction, the electrons will be pushed out.
+Conversely, if a strong electric field is applied in the opposite direction, the electrons are pushed out of the floating gate.
 {% endstep %}
 
 {% step %}
 #### Floating Gate Transistor
 
-Put the floating gate under the gate of the NMOS transistor, we can get the floating gate transistor
+By placing a floating gate between the control gate and the channel of an NMOS transistor, we create a floating gate transistor.
 
 <figure><img src="../.gitbook/assets/floating-gate.png" alt="" width="563"><figcaption></figcaption></figure>
 
 We can perform the following three operations on the floating gate transistor:
 
-1. **Write/Program**: Give the gate a very high voltage, subtrate 0V, then electrons will be pulled into the floating gate and stored in it. This is called write/program.
-2. **Erase**: Oppositely, we give substrate a very high voltage (e.g., 20V) and give the control gate 0V, creating an opposite electric field as we write, then electrons will be pushed out of the floating gate.
-3. **Read**: Remember that the threshold voltage of the NMOS? We will use it to try -> Apply this threshold voltage at gate, substrate 0V.
-   1. If there are electrons in the floating gate, they will cancel off some of the gate voltage, making the real voltage below the floating gate smaller than the threshold voltage of NMOS, thus no channel can be formed, the device is in cut-off mode.
-      1. No conductions -> electrons in floating gate -> read 0.
-   2. If there are no electrons in the floating gate, nothing will get cancelled off, thus the NMOS will be turned on!
-      1. Got conductions -> no electron in floating gate -> read 1.
+1. **Program (Write 0**): Apply a high programming voltage ($$V_{pgm}$$) to the control gate and $$0V$$ to the substrate. Electrons tunnel into the floating gate and are stored there. This increases the threshold voltage ($$V_{th}$$).
+2. **Erase (Write 1)**: Apply a high erase voltage ($$V_{era}$$, usually the same as $$V_{pgm}$$) to the substrate and $$0V$$ to the control gate. This creates an opposite electric field, forcing electrons out of the floating gate. This decreases the threshold voltage.
+3. **Read**: We use the shift in threshold voltage ($$V_{th}$$) to determine the state. Apply a reference voltage (usually $$0V$$) to the gate.
+   1. **If electrons are present (Programmed/0)**: The negative charge in the FG cancels out the gate voltage. The effective voltage is below the $$V_{th}$$ of the transistor. The device is in **cutoff** (does not conduct).
+      * No conduction $$\rightarrow$$ Electrons present $$\rightarrow$$ Read 0.
+   2. **If no electrons are present (Erased/1)**: There is no cancellation. The NMOS turns ON.
+      * Conduction $$\rightarrow$$ No electrons $$\rightarrow$$ Read 1.
 {% endstep %}
 
 {% step %}
 #### SLC/MLC/TLC/QLC
 
-In the above section, we see that the floating gate has only **2 options**
+In the section above, the floating gate has only 2 options:
 
-* Have electrons
-* Don't have electrons
+* Has electrons (0)
+* No electrons (1)
 
-This is called **SLC**. For the rest 3 types
+This is called SLC (Single Level Cell). The other types are:
 
-1. **MLC**: 1 floating gate can store 4 states (using 2 bits)
-2. **TLC:** 8 states (using 3 bits)
-3. **QLC**: 16 states (using 4 bits)
+1. **MLC (Multi-Level Cell)**: 1 floating gate stores 4 states (2 bits).
+2. **TLC (Triple-Level Cell)**: 8 states (3 bits).
+3. **QLC (Quad-Level Cell)**: 16 states (4 bits).
 {% endstep %}
 {% endstepper %}
 
-The circuit diagram for the NAND-Flash can be shown as follows:
+The circuit diagram for NAND Flash is shown below:
 
 <figure><img src="../.gitbook/assets/nand-flash.png" alt="" width="222"><figcaption></figcaption></figure>
 
-The diagram above is called a **block** and it is composed of several **strings,** each string is controlled by one bit line. At the SSL and GSL, there are NMOS transistors, the rest controlled by different WLs are floating gate transistors. All the floating gate connected by the same word line is called a **page**.
+The diagram above represents a **Block**. It is composed of several **Strings**, where each string is connected to one Bit Line.
+
+* **SSL (String Select Line) and GSL (Ground Select Line)** control standard NMOS transistors at the top and bottom of the stack.
+* The remaining transistors, controlled by different Word Lines (WLs), are floating gate transistors.
+* All floating gate transistors connected to the same Word Line form a **Page**.
 
 {% hint style="info" %}
-Within the same block, all the floating gate and the NMOS share the same common p-substrate.
+Within the same block, all floating gates and NMOS transistors share a common p-substrate (p-well).
 {% endhint %}
 
 ### Read
 
-In NAND Flash, one time read can only read one page.
+In NAND Flash, read operations are performed at the **Page** granularity.
 
-1. Apply high voltage to SSL and CSL to make the NMOS conducted.
-2. Apply a special high voltage to the other word lines (instead of the word line / page you are going to read). All the transistors conduct now!
-   1. Special high voltage means that no matter the floating gate is full of electrons, applying this voltage can still make the transistor conduct and the voltage is not enough to trigger the tunneling effect causing the number of electrons in the floating gate to increase.
-3. Apply the NMOS threshold voltage to the word line we are reading.
-   1. If the floating gate got electrons, that transistor cannot conduct
-   2. Otherwise, that transistor can conduct.
-4. We can check the voltage at the bit line to read.
+1. **Select String**: Apply high voltage to SSL and GSL to turn on the selection transistors.
+2. **Bypass Unselected Cells**: Apply a Pass Voltage ($$V_{pass}$$) to all _other_ Word Lines (the ones we are _not_ reading).
+   * Note: $$V_{pass}$$ is a voltage high enough to turn on a transistor regardless of whether its floating gate is charged (programmed) or empty (erased), but not high enough to trigger tunneling (programming). This turns the unselected cells into "pass-through" wires.
+3. **Read Selected Cell**: Apply the read reference voltage ($$0V$$) to the specific Word Line we are reading.
+   1. If the Floating Gate has electrons (programmed), the transistor **does not conduct**.
+   2. If the Floating Gate is empty (erased), the transistor **conducts**.
+4. **Sense**: The sense amplifiers detect if current flows through the string (Bit Line voltage drops) or not (Bit Line stays high).
 
 ### Write
 
-One time write can only write one page also.
+Writing (Programming) is also performed at the **Page** granularity. Note that we can only program **1s to 0**s. To turn 0s back to 1s, we must Erase (see below).
 
-1. Apply high voltage to SSL -> conducting. 0V to CSL -> cut off
-2. Set all bit lines to 0V.
-3. Apply the special high voltage to the other word lines (same as above)
-4. Apply the very high voltage (for tunneling effect to happen) at that specific word line we are writing to
-   1. If we want to write/program the floating gate, we need to suck electrons -> just let bit line to be 0V.
-      1. Suck electrons -> Write 0
-   2. If we don't want to write a floating gate, no suck electrons -> let bit line to be a high voltage so that the voltage difference between gate (WL) and source (high voltage) is not enough to trigger the tunneling effect, no electrons will be sucked into the floating gate.
-      1. No suck electrons -> Write 1
+1. **Setup**: Apply high voltage to SSL (to connect the string to BL) and $$0V$$ to GSL (to disconnect from ground).
+2. **Data Setup**: Set the Bit Lines based on the data to be written:
+   * **To Write 0 (Program)**: Set Bit Line to 0V. This creates a high potential difference between the Gate and the Channel, allowing tunneling.
+   * **To Write 1 (Inhibit)**: Set Bit Line to $$V_{DD}$$. This raises the channel potential, reducing the voltage difference between the Gate and Channel so that tunneling _does not_ occur (Program Inhibit).
+3. **Pass Voltage**: Apply $$V_{pass}$$ to the unselected Word Lines (to pass the Bit Line voltage down the string).
+4. **Program Voltage**: Apply the Programming Voltage ($$V_{pgm}$$, a very high voltage, e.g., 20V) to the specific Word Line we are writing to.
+   * **If BL is 0V**: Electrons tunnel into the floating gate $$\rightarrow$$ Write 0.
+   * **If BL is High**: No tunneling occurs $$\rightarrow$$ State remains 1.
 
 ### Erase
 
-To erase the data stored in the NAND flash. We apply a high voltage at the subtrate. As the substrate is common, all the data on the block will be erased!
+Erase operations in NAND Flash are performed at the **Block** granularity (you cannot erase just one Page).
+
+1. **Apply Erase Voltage**: Apply a high Erase Voltage ($$V_{era}$$) to the common substrate (p-well).
+2. **Ground Gates**: Set all Word Lines (control gates) in the block to $$0V$$.
+3. **Result**: Electrons in the floating gates are attracted to the substrate (tunneling out of the FG) due to the strong electric field. All cells in the block are reset to 1.
