@@ -148,3 +148,18 @@ In a restorer circuit, the main driver (NMOS) must be stronger than the feedback
 * PMOS Width: Larger = Stronger pull-up.
 * NMOS Width: Larger = Stronger pull-down.
 {% endhint %}
+
+<details>
+
+<summary>More on NMOS</summary>
+
+NMOS passes weak 1.
+
+* If the **voltage at drain** is V<sub>dd</sub>, voltage at the source is V<sub>dd</sub>-V<sub>tn</sub> **maximum**.
+* If the **voltage at drain** is smaller than V<sub>dd</sub>-V<sub>tn</sub>, voltage at the source is equal to the voltage at the drain maximum.
+
+Below are two very important applications:
+
+<div><figure><img src="../.gitbook/assets/nmos-application-2.png" alt=""><figcaption></figcaption></figure> <figure><img src="../.gitbook/assets/nmos-application-1.png" alt=""><figcaption></figcaption></figure></div>
+
+</details>
