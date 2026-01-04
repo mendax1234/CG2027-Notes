@@ -429,7 +429,7 @@ $$
 
 ## Load Capacitance / Resistance
 
-### Load Capacitance Estimation
+### Load Capacitance
 
 When a CMOS gate **drives** another CMOS gate, the driver "sees" a [**capacitive load**](#user-content-fn-6)[^6]. The load capacitance consists of
 
