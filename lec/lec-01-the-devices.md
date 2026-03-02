@@ -100,7 +100,7 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 <figure><img src="../.gitbook/assets/diode-reverse-bias.png" alt=""><figcaption></figcaption></figure>
 
 * Under **reverse-bias**, the voltage at _p-_&#x74;ype is lower than the voltage at _n-_&#x74;ype.
-* The reverse current (around 0) flows through the diode from the _n-_&#x74;ype sied to the _p-_&#x74;ype side.
+* The reverse current (around 0) flows through the diode from the _n-_&#x74;ype side to the _p-_&#x74;ype side.
 * For reverse bias voltage magnitude, |V| = V<sub>R</sub> < V<sub>Z</sub> (V<sub>Z</sub> is the **breakdown voltage**), the reverse current is very small and can be treated practically as **zero**, meaning the diode is equivalent to an **open circuit**.
 
 #### Breakdown Region
