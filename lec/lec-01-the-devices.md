@@ -112,11 +112,11 @@ Diode (semiconductor pn-junction) is the simplest (2-terminal) and most&#x20;fu
 
 ### More under the hood
 
-As we have mentioned above, the _pn-_&#x6A;unction or the diode is **most fundamental** circuit element. We can also find _pn-_&#x6A;unction in the MOSFET transistor. So, it will be good to know what's happening underneath the hood.
+As we have mentioned above, the _pn-_&#x6A;unction or the diode is the **most fundamental** circuit element. We can also find _pn-_&#x6A;unction in the MOSFET transistor. So, it will be good to know what's happening underneath the hood.
 
 #### Holes and Electrons
 
-The main carrier in _n-_&#x74;ype material is **electron** while in _p-_&#x74;ype material is **hole**. But we should know that in whatever material, **only** the **electrons** can move freely, and the movement of electrons will cause the "effect" of **holes** are moving also, but actually the movement of holes is caused by the movement of **electrons**.
+The main carrier in _n-_&#x74;ype material is **electron** while in _p-_&#x74;ype material is **hole**. But we should know that in whatever material, **only** the **electrons** can move freely, and the movement of electrons will cause the "effect" that **holes** are moving too, but actually the movement of holes is caused by the movement of **electrons**.
 
 Both _n_-type and _p-_&#x74;ype material are neutral, by which I mean inside each material, the number of electrons and the number of **protons** are the same. The underneath principle is that:
 
@@ -271,7 +271,7 @@ Before moving on, let's make some conventions
 
 ### Introduction
 
-There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put it simply, just NMOS and PMOS.
+There are two types of MOSFET: n-channel and p-channel MOSFETs, or to put it simply, just NMOS and PMOS.
 
 <figure><img src="../.gitbook/assets/nmos-basic-structure.png" alt="" width="563"><figcaption></figcaption></figure>
 
@@ -339,7 +339,7 @@ There are two types of MOSFET: n-channel and&#x20;p-channel MOSFETs. Or to put 
 2. For the sake of simplicity, we made the following rules when analyzing the MOSFET.
    1. NMOS and PMOS are ON when the |V<sub>GS</sub>| > |V<sub>TH</sub>| and OFF when |V<sub>GS</sub>| <i class="fa-less-than-equal">:less-than-equal:</i> |V<sub>TH</sub>|
    2. If we increase |V<sub>GS</sub>|, the channel will become wider, thus the output current I<sub>D</sub> will increase.
-   3. For the determine the **linear region** or the **saturation region**, we must strictly following the following table. The V<sub>GS</sub> and V<sub>TH</sub> relationship we can use the **absolute thinking** mentioned above. For the V<sub>DS</sub>, V<sub>GS</sub> and V<sub>TH</sub>, we can use the [I-V characteristcs](lec-01-the-devices.md#output-characteristic) diagram introduced later!
+   3. To determine the **linear region** or the **saturation region**, we must strictly following the following table. For the V<sub>GS</sub> and V<sub>TH</sub> relationship we can use the **absolute thinking** mentioned above. For the V<sub>DS</sub>, V<sub>GS</sub> and V<sub>TH</sub>, we can use the [I-V characteristcs](lec-01-the-devices.md#output-characteristic) diagram introduced later!
 {% endhint %}
 
 <figure><img src="../.gitbook/assets/cmos-region reference table.png" alt=""><figcaption></figcaption></figure>
